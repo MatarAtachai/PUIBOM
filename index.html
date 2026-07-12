@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Special Blue Space - Happily 12th ❤</title>
+    <title>Happy 9.2 Anniversary ❤</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts -->
@@ -14,8 +14,16 @@
     <style>
         body {
             font-family: 'Itim', 'Mitr', sans-serif;
-            background: linear-gradient(135deg, #f0f6fa 0%, #fcf8f2 100%); /* ไล่โทนฟ้าครีมพาสเทลระดับพรีเมียม */
+            background: linear-gradient(135deg, #f0f6fa 0%, #fcf8f2 100%);
             overflow-x: hidden;
+            overscroll-behavior-y: none;
+        }
+
+        /* 3D Glassmorphism Card Tilt */
+        .tilt-card {
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
         }
 
         /* แกะเปลือกมังคุด */
@@ -44,7 +52,7 @@
             }
         }
 
-        /* หัวใจสปริงเต้นตึกตัก */
+        /* หัวใจเต้นตึกตัก */
         @keyframes springHeart {
             0%, 100% { transform: scale(1); }
             15% { transform: scale(1.2) rotate(-5deg); }
@@ -54,44 +62,6 @@
         }
         .spring-heart-beat {
             animation: springHeart 2.5s cubic-bezier(0.25, 0.8, 0.25, 1) infinite;
-        }
-
-        /* 3D Glassmorphism Card Tilt */
-        .tilt-card {
-            transform-style: preserve-3d;
-            perspective: 1000px;
-            transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
-        }
-
-        /* เคลื่นเสียงเพอร์เฟกต์น้องเหมียวเมื่อโดนลูบหัว */
-        .purr-wave {
-            position: absolute;
-            border: 2.5px dashed rgba(14, 165, 233, 0.5);
-            border-radius: 50%;
-            pointer-events: none;
-            transform: translate(-50%, -50%) scale(0);
-            animation: ripplePurr 1s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
-        }
-        @keyframes ripplePurr {
-            0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
-            100% { transform: translate(-50%, -50%) scale(1.8); opacity: 0; }
-        }
-
-        /* ซองจดหมาย */
-        .envelope-flap {
-            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-            transform-origin: top;
-        }
-        .envelope.open .envelope-flap {
-            transform: rotateX(180deg);
-            z-index: 10;
-        }
-        .letter {
-            transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s;
-        }
-        .envelope.open .letter {
-            transform: translateY(-110px) scale(1.02);
-            z-index: 20;
         }
 
         /* การเปลี่ยนหน้าแบบ Elastic Spring เด้งดึ๋งนุ่มนวล */
@@ -121,45 +91,72 @@
         .cat-card-container:hover .cat-ear-l { transform: rotate(-15deg); }
         .cat-card-container:hover .cat-ear-r { transform: rotate(15deg); }
 
-        /* การซูมภาพโพลารอยด์แกลเลอรี */
-        .gallery-polaroid {
-            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+        /* แกลเลอรีรูปภาพแนวนอนแบบสไลด์ */
+        .gallery-slider {
+            display: flex;
+            gap: 1.5rem;
+            padding: 1rem 1.5rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none; /* Hide scrollbar for Firefox */
+            -ms-overflow-style: none; /* Hide scrollbar for IE/Edge */
+            cursor: grab;
         }
-        .gallery-polaroid:hover {
-            transform: scale(1.08) rotate(0deg) !important;
-            z-index: 30;
-            box-shadow: 0 25px 30px -5px rgba(14, 165, 233, 0.2);
+        .gallery-slider::-webkit-scrollbar {
+            display: none; /* Hide scrollbar for Chrome/Safari */
         }
-
-        /* แอนิเมชันลอยขยับปลิวแสนละมุนสลับทิศทางแบบโพลารอยด์ */
-        @keyframes floatSway1 {
-            0% { transform: rotate(-3deg) translateY(0px) translateX(0px); }
-            100% { transform: rotate(-1deg) translateY(-8px) translateX(3px); }
+        .gallery-slider:active {
+            cursor: grabbing;
         }
-        @keyframes floatSway2 {
-            0% { transform: rotate(4deg) translateY(0px) translateX(0px); }
-            100% { transform: rotate(1deg) translateY(-10px) translateX(-4px); }
+        .gallery-item {
+            flex: 0 0 auto;
+            width: 85%;
+            scroll-snap-align: center;
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
         }
-        @keyframes floatSway3 {
-            0% { transform: rotate(-1.5deg) translateY(0px) translateX(0px); }
-            100% { transform: rotate(1.5deg) translateY(-7px) translateX(-2px); }
+        .gallery-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 25px -5px rgba(14, 165, 233, 0.2);
         }
-        @keyframes floatSway4 {
-            0% { transform: rotate(3deg) translateY(0px) translateX(0px); }
-            100% { transform: rotate(-2deg) translateY(-9px) translateX(4px); }
-        }
-
-        .float-sway-1 { animation: floatSway1 4.5s ease-in-out infinite alternate; }
-        .float-sway-2 { animation: floatSway2 5s ease-in-out infinite alternate; }
-        .float-sway-3 { animation: floatSway3 4.2s ease-in-out infinite alternate; }
-        .float-sway-4 { animation: floatSway4 4.8s ease-in-out infinite alternate; }
-
-        @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
+        .gallery-image {
+            pointer-events: none; /* สำคัญสำหรับการทำ Drag Scroll */
+            user-select: none;
         }
 
-        /* สไตล์ Scrollbar ฟ้าครี */
+        /* Confetti Animation (พลุเฉลิมฉลองหน้าสุดท้าย) */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            opacity: 0;
+            z-index: 50;
+        }
+        @keyframes makeItRain {
+            0% { opacity: 0; }
+            5% { opacity: 1; transform: translateY(-20px) rotate(0deg); }
+            100% { opacity: 0; transform: translateY(100vh) rotate(720deg); }
+        }
+
+        /* แอนิเมชันใหม่สำหรับหน้า 1 (Sequential Fade-in Up) */
+        .animate-item { opacity: 0; }
+        .page-active .animate-item {
+            animation: slideInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+        .delay-6 { animation-delay: 0.6s; }
+        .delay-7 { animation-delay: 0.7s; }
+
+        @keyframes slideInUp {
+            0% { transform: translateY(15px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        /* สไตล์ Scrollbar ทั่วไป */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -194,22 +191,20 @@
             <div class="absolute top-4 left-4 text-sky-300 text-xl"><i class="fa-solid fa-cat animate-bounce"></i></div>
             <div class="absolute bottom-4 right-4 text-purple-300 text-xl"><i class="fa-solid fa-lemon"></i></div>
             
-            <h1 class="text-3xl font-extrabold text-sky-600 mb-2 font-serif tracking-wider">OUR BLUE HEAVEN</h1>
+            <h1 class="text-3xl font-extrabold text-sky-600 mb-2 font-serif tracking-wider">Happy 9.2 Anniversary</h1>
             <p class="text-slate-400 text-xs mb-6">สุขสันต์วันครบรอบแสนอบอุ่นของเราสองคนและสองต้าวแสบ</p>
             
-            <!-- เจ้าม่อน (แมวส้ม) และ โมจิ (แมวขาวหูพับ) แอบหลังมังคุด SVG -->
+            <!-- เจ้าม่อน (แมวส้ม) และ โมจิ (แมวสกอตติชขาว) แอบหลังมังคุด SVG -->
             <div class="w-64 h-48 mx-auto mb-6 flex items-center justify-center relative bg-sky-50/50 rounded-2xl border border-sky-100 shadow-inner overflow-hidden">
                 <svg viewBox="0 0 160 120" class="w-full h-full">
                     <!-- ต้าวโมจิ (แมวสกอตติชขาวหูพับ ทางขวา) -->
                     <ellipse cx="110" cy="75" rx="18" ry="16" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
                     <circle cx="110" cy="55" r="14" fill="#ffffff" />
-                    <!-- หูต้าวโมจิ (สกอตติชหูพับงอลงข้างหัว) -->
                     <path d="M 97,46 C 94,40 102,40 104,47 C 103,49 99,50 97,46 Z" fill="#e2e8f0" />
                     <path d="M 98,47 C 96,42 101,42 103,48 C 102,49 100,50 98,47 Z" fill="#fda4af" opacity="0.6" />
                     <path d="M 123,46 C 126,40 118,40 116,47 C 117,49 121,50 123,46 Z" fill="#e2e8f0" />
                     <path d="M 122,47 C 124,42 119,42 117,48 C 118,49 120,50 122,47 Z" fill="#fda4af" opacity="0.6" />
-                    
-                    <circle cx="105" cy="55" r="2" fill="#0ea5e9" /> <!-- ตาสีฟ้าสกอตติช -->
+                    <circle cx="105" cy="55" r="2" fill="#0ea5e9" />
                     <circle cx="115" cy="55" r="2" fill="#0ea5e9" />
                     <circle cx="101" cy="59" r="2" fill="#fda4af" opacity="0.6" />
                     <circle cx="119" cy="59" r="2" fill="#fda4af" opacity="0.6" />
@@ -217,161 +212,127 @@
                     <!-- ไอ้ม่อน (แมวบ้านสีส้มลายส้มเข้ม ทางซ้าย) -->
                     <ellipse cx="50" cy="75" rx="18" ry="16" fill="#fed7aa" />
                     <circle cx="50" cy="55" r="14" fill="#fed7aa" />
-                    <!-- หูไอ้ม่อน (ตั้งชันน่ารัก) -->
                     <polygon points="38,47 44,34 48,46" fill="#fed7aa" />
                     <polygon points="62,47 56,34 52,46" fill="#fed7aa" />
                     <polygon points="40,45 44,37 46,44" fill="#fda4af" opacity="0.6" />
                     <polygon points="60,45 56,37 54,44" fill="#fda4af" opacity="0.6" />
-                    <!-- ลายสลับส้มเข้มบนหัว -->
                     <path d="M46,43 L54,43 L50,47 Z" fill="#ea580c" />
                     <path d="M38,53 L43,53 L41,55 Z" fill="#ea580c" />
                     <path d="M62,53 L57,53 L59,55 Z" fill="#ea580c" />
-                    
                     <circle cx="45" cy="55" r="2" fill="#1e293b" />
                     <circle cx="55" cy="55" r="2" fill="#1e293b" />
                     <circle cx="41" cy="59" r="2" fill="#fda4af" opacity="0.6" />
                     <circle cx="59" cy="59" r="2" fill="#fda4af" opacity="0.6" />
 
-                    <!-- อุ้งเท้าสองข้างโผล่มาจับมังคุด -->
                     <circle cx="65" cy="88" r="5" fill="#ffffff" stroke="#cbd5e1" />
                     <circle cx="95" cy="88" r="5" fill="#ffffff" stroke="#cbd5e1" />
 
-                    <!-- ลูกมังคุดผลโตน่ารักตรงกลาง -->
+                    <!-- ลูกมังคุด -->
                     <g transform="translate(62, 68)">
-                        <!-- ขั้วมังคุด -->
                         <rect x="15" y="-5" width="6" height="10" rx="2" fill="#15803d" />
                         <path d="M5,5 Q18,-3 31,5" fill="none" stroke="#16a34a" stroke-width="4" stroke-linecap="round" />
-                        <!-- ผลม่วง -->
                         <circle cx="18" cy="20" r="16" fill="#581c87" />
-                        <!-- แก้มแดงผล -->
                         <ellipse cx="10" cy="18" rx="4" ry="2" fill="#a21caf" opacity="0.4" />
-                        <!-- หัวใจเล็กแปะผล -->
                         <path d="M18,15 Q18,15 15,12 Q13,14 15,18 L18,22 L21,18 Q23,14 21,12 Z" fill="#f43f5e" class="spring-heart-beat origin-center" />
                     </g>
                 </svg>
             </div>
             
-            <p class="text-slate-600 mb-6 text-base font-semibold">"ต้อนรับสู่อวกาศสีฟ้าแสนหวานของต้าว 155 ซม." 🌌</p>
             <button onclick="unlockWebsite(event)" class="bg-sky-500 hover:bg-sky-600 text-white font-bold text-lg px-12 py-3.5 rounded-full shadow-lg transition-all transform hover:scale-105 active:scale-95 duration-200">
                 เปิดของขวัญครบรอบ <i class="fa-solid fa-gift ml-2 text-pink-300"></i>
             </button>
         </div>
     </div>
 
-    <!-- 2. ส่วนเนื้อหาหลักแบบเปิดเป็นหน้าๆ (Main Journey Container) -->
+    <!-- 2. ส่วนเนื้อหาหลักแบบเปิดเป็นหน้าๆ -->
     <div id="main-content" class="w-full max-w-md px-4 mt-8 hidden flex-grow flex flex-col justify-between z-10 relative">
         
-        <!-- Header ติดคงที่ตลอดทริป -->
+        <!-- Header -->
         <header class="text-center mb-4 select-none">
-            <h1 class="text-3xl font-extrabold text-sky-600 drop-shadow-sm font-serif">OUR BLUE DIARY</h1>
+            <h1 class="text-3xl font-extrabold text-sky-600 drop-shadow-sm font-serif">Happy 9.2 Anniversary</h1>
             <p class="text-[#b19f87] font-semibold text-sm">Every Month’s 12th With You 💖</p>
         </header>
 
-        <!-- โซนเปลี่ยนแต่ละหน้าอย่างราบรื่น -->
+        <!-- หน้าเนื้อหา -->
         <div id="pages-container" class="w-full flex-grow flex items-center justify-center">
 
-            <!-- PAGE 1: ปฏิทินครบรอบวันที่ 12 & รายละเอียดสเปกแฟนสุดที่รัก -->
+            <!-- PAGE 1: ปฏิทินครบรอบวันที่ 12 & สเปกแฟน -->
             <div id="page-1" class="page-transition w-full page-inactive">
                 <div class="tilt-card bg-white/80 backdrop-blur-md rounded-3xl p-6 shadow-xl border-2 border-sky-100">
-                    <div class="flex justify-between items-center mb-4">
-                        <span class="text-sky-600 font-bold"><i class="fa-solid fa-calendar-check mr-1 text-sky-500"></i> วันที่ 12 แสนรัก</span>
-                        <span class="text-xs bg-amber-50 text-amber-700 px-3 py-1 rounded-full border border-amber-200">สเปกนี้มีชิ้นเดียวในโลก</span>
+                    <div class="flex justify-between items-center mb-5 animate-item delay-1">
+                        <span class="text-sky-600 font-bold text-lg"><i class="fa-regular fa-calendar-check mr-1 text-sky-500"></i> Our 12th Day</span>
+                        <span class="text-[10px] bg-slate-800 text-white px-3 py-1.5 rounded-full shadow-md font-sans tracking-wide">My Favorite Person ✨</span>
                     </div>
 
-                    <!-- รายละเอียดข้อมูลนางฟ้าตัวเล็ก -->
-                    <div class="bg-sky-50/50 rounded-2xl p-4 mb-4 border border-sky-100 text-left text-xs text-slate-600 space-y-2">
-                        <div class="flex justify-between">
-                            <span class="font-bold text-slate-700">🐱 ต้าวสี่ขาผู้คุมบ้าน:</span>
-                            <span class="text-sky-600 font-semibold">ม่อน (ส้มแสบ) & โมจิ (สกอตติชขาว) 🐾</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span class="font-bold text-slate-700">🍇 ผลไม้เยียวยาใจ:</span>
-                            <span class="text-purple-600 font-semibold">มังคุดรสหวานฉ่ำ 💜</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span class="font-bold text-slate-700">📅 วันเกิดนางฟ้า:</span>
-                            <span class="text-indigo-600 font-semibold">วันเสาร์ (วันแห่งความโชคดี) 🪐</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span class="font-bold text-slate-700">💬 สไตล์ความรัก:</span>
-                            <span class="text-emerald-600">มีอะไรคุยกันตรงๆ สบายใจที่สุด</span>
+                    <!-- รายละเอียดข้อมูลนางฟ้าตัวเล็ก ปรับใหม่ให้ดูมินิมอล ชิลๆ -->
+                    <div class="bg-gradient-to-br from-sky-50/80 to-white rounded-2xl p-4 mb-5 border border-sky-100 text-left text-xs text-slate-600 space-y-2.5 shadow-sm">
+                        
+                        <div class="flex justify-between items-center animate-item delay-2 p-2 hover:bg-white rounded-lg transition-all duration-300 shadow-sm border border-transparent hover:border-sky-100 hover:-translate-y-0.5">
+                            <span class="font-bold text-slate-700 flex items-center"><span class="w-5 text-center mr-1">🐱</span> แก๊งป่วน:</span>
+                            <span class="text-sky-600 font-semibold text-[11px]">ม่อน (ส้ม) & โมจิ (สกอตติช)</span>
                         </div>
                         
-                        <!-- ไม้บรรทัดวัดส่วนสูง 155 ซม. -->
-                        <div class="pt-2 border-t border-sky-100">
-                            <div class="flex justify-between text-[10px] text-slate-400 mb-1">
+                        <div class="flex justify-between items-center animate-item delay-3 p-2 hover:bg-white rounded-lg transition-all duration-300 shadow-sm border border-transparent hover:border-sky-100 hover:-translate-y-0.5">
+                            <span class="font-bold text-slate-700 flex items-center"><span class="w-5 text-center mr-1">💜</span> ของโปรด:</span>
+                            <span class="text-purple-600 font-semibold text-[11px]">มังคุด (Mangosteen Lover)</span>
+                        </div>
+                        
+                        <div class="flex justify-between items-center animate-item delay-4 p-2 hover:bg-white rounded-lg transition-all duration-300 shadow-sm border border-transparent hover:border-sky-100 hover:-translate-y-0.5">
+                            <span class="font-bold text-slate-700 flex items-center"><span class="w-5 text-center mr-1">🪐</span> วันเกิด:</span>
+                            <span class="text-indigo-500 font-semibold text-[11px]">วันเสาร์ (Saturday Vibes)</span>
+                        </div>
+                        
+                        <div class="flex justify-between items-center animate-item delay-5 p-2 hover:bg-white rounded-lg transition-all duration-300 shadow-sm border border-transparent hover:border-sky-100 hover:-translate-y-0.5">
+                            <span class="font-bold text-slate-700 flex items-center"><span class="w-5 text-center mr-1">💬</span> ความรัก:</span>
+                            <span class="text-emerald-500 font-semibold text-[11px]">คุยตรงๆ สบายใจ ชิลแต่รักจริง</span>
+                        </div>
+                        
+                        <!-- ไม้บรรทัดวัดส่วนสูง -->
+                        <div class="pt-3 border-t border-sky-100 animate-item delay-6 px-2">
+                            <div class="flex justify-between text-[10px] text-slate-400 mb-1.5 font-sans font-medium">
                                 <span>140 cm</span>
-                                <span class="text-sky-600 font-bold">155 cm (ส่วนสูงแฟนเค้า)</span>
+                                <span class="text-sky-600 font-bold bg-sky-100 px-2.5 py-0.5 rounded-full shadow-sm">155 cm (พอดีกอด 🫂)</span>
                                 <span>170 cm</span>
                             </div>
-                            <div class="w-full h-3 bg-slate-100 rounded-full relative overflow-hidden border border-slate-200">
-                                <div id="height-bar" class="height-line absolute top-0 left-0 h-full bg-gradient-to-r from-sky-300 to-sky-500 rounded-full" style="width: 0%"></div>
-                                <!-- หมุดทองชี้จุดพอดีกอด -->
-                                <div class="absolute top-0 h-full w-1.5 bg-pink-500" style="left: 60%"></div>
+                            <div class="w-full h-2.5 bg-slate-100 rounded-full relative overflow-hidden shadow-inner">
+                                <div id="height-bar" class="height-line absolute top-0 left-0 h-full bg-gradient-to-r from-sky-400 to-sky-300 rounded-full" style="width: 0%"></div>
+                                <!-- หมุดเส้นชี้จุดพอดีกอด -->
+                                <div class="absolute top-0 h-full w-1 bg-pink-400 shadow-[0_0_5px_rgba(244,63,94,0.6)]" style="left: 60%"></div>
                             </div>
-                            <p class="text-center text-[10px] text-pink-500 mt-1">"ความสูง 155 ซม. สเต็ปที่พอดีกับอ้อมกอดของเค้าเป๊ะพอดี!"</p>
                         </div>
                     </div>
                     
-                    <!-- ปฏิทินแสดงผลวันที่ 12 -->
-                    <div class="grid grid-cols-7 gap-1.5 text-xs text-slate-600 bg-white/70 p-3 rounded-2xl border border-sky-50 shadow-inner">
-                        <div class="font-bold text-sky-400">อา</div>
-                        <div class="font-bold text-sky-400">จ</div>
-                        <div class="font-bold text-sky-400">อ</div>
-                        <div class="font-bold text-sky-400">พ</div>
-                        <div class="font-bold text-sky-400">พฤ</div>
-                        <div class="font-bold text-sky-400">ศ</div>
-                        <div class="font-bold text-sky-400">ส</div>
-
-                        <div class="py-1 text-slate-300">29</div>
-                        <div class="py-1 text-slate-300">30</div>
-                        <div class="py-1 text-slate-300">31</div>
-                        <div class="py-1 rounded hover:bg-sky-50 cursor-pointer">1</div>
-                        <div class="py-1 rounded hover:bg-sky-50 cursor-pointer">2</div>
-                        <div class="py-1 rounded hover:bg-sky-50 cursor-pointer">3</div>
-                        <div class="py-1 rounded hover:bg-sky-50 cursor-pointer">4</div>
-                        <div class="py-1 rounded hover:bg-sky-50 cursor-pointer">5</div>
-                        <div class="py-1 rounded hover:bg-sky-50 cursor-pointer">6</div>
-                        <div class="py-1 rounded hover:bg-sky-50 cursor-pointer">7</div>
-                        <div class="py-1 rounded hover:bg-sky-50 cursor-pointer">8</div>
-                        <div class="py-1 rounded hover:bg-sky-50 cursor-pointer">9</div>
-                        <div class="py-1 rounded hover:bg-sky-50 cursor-pointer">10</div>
-                        <div class="py-1 rounded hover:bg-sky-50 cursor-pointer">11</div>
-
-                        <!-- วันครบรอบแสนพิเศษ วันที่ 12 -->
-                        <div onclick="spawnAdvancedBurst(event)" class="relative flex items-center justify-center bg-sky-500 text-white font-bold rounded-full cursor-pointer h-7 w-7 mx-auto shadow-md hover:scale-110 active:scale-95 transition-all">
+                    <!-- ปฏิทิน -->
+                    <div class="grid grid-cols-7 gap-1.5 text-xs text-slate-600 bg-white p-4 rounded-2xl border border-sky-50 shadow-sm animate-item delay-7">
+                        <div class="font-bold text-sky-400">อา</div><div class="font-bold text-sky-400">จ</div><div class="font-bold text-sky-400">อ</div><div class="font-bold text-sky-400">พ</div><div class="font-bold text-sky-400">พฤ</div><div class="font-bold text-sky-400">ศ</div><div class="font-bold text-sky-400">ส</div>
+                        <div class="py-1 text-slate-300">29</div><div class="py-1 text-slate-300">30</div><div class="py-1 text-slate-300">31</div><div class="py-1 rounded hover:bg-sky-50 cursor-pointer transition-colors">1</div><div class="py-1 rounded hover:bg-sky-50 cursor-pointer transition-colors">2</div><div class="py-1 rounded hover:bg-sky-50 cursor-pointer transition-colors">3</div><div class="py-1 rounded hover:bg-sky-50 cursor-pointer transition-colors">4</div><div class="py-1 rounded hover:bg-sky-50 cursor-pointer transition-colors">5</div><div class="py-1 rounded hover:bg-sky-50 cursor-pointer transition-colors">6</div><div class="py-1 rounded hover:bg-sky-50 cursor-pointer transition-colors">7</div><div class="py-1 rounded hover:bg-sky-50 cursor-pointer transition-colors">8</div><div class="py-1 rounded hover:bg-sky-50 cursor-pointer transition-colors">9</div><div class="py-1 rounded hover:bg-sky-50 cursor-pointer transition-colors">10</div><div class="py-1 rounded hover:bg-sky-50 cursor-pointer transition-colors">11</div>
+                        
+                        <!-- วันครบรอบแสนพิเศษ วันที่ 12 ปรับแต่งให้ดูโมเดิร์นขึ้น -->
+                        <div onclick="spawnAdvancedBurst(event)" class="relative flex items-center justify-center bg-gradient-to-tr from-sky-400 to-sky-500 text-white font-bold rounded-xl cursor-pointer h-8 w-8 mx-auto shadow-md hover:scale-110 hover:shadow-lg hover:-translate-y-0.5 active:scale-95 transition-all duration-300 group">
                             12
-                            <span class="absolute -bottom-1 -right-1 text-[8px] text-pink-300 spring-heart-beat"><i class="fa-solid fa-heart"></i></span>
+                            <span class="absolute -bottom-1 -right-1 text-[10px] text-pink-300 group-hover:animate-ping"><i class="fa-solid fa-heart"></i></span>
                         </div>
                         
-                        <div class="py-1 rounded hover:bg-sky-50 cursor-pointer">13</div>
-                        <div class="py-1 rounded hover:bg-sky-50 cursor-pointer">14</div>
-                        <div class="py-1 rounded hover:bg-sky-50 cursor-pointer">15</div>
-                        <div class="py-1 rounded hover:bg-sky-50 cursor-pointer">16</div>
-                        <div class="py-1 rounded hover:bg-sky-50 cursor-pointer">17</div>
-                        <div class="py-1 rounded hover:bg-sky-50 cursor-pointer">18</div>
+                        <div class="py-1 rounded hover:bg-sky-50 cursor-pointer transition-colors">13</div><div class="py-1 rounded hover:bg-sky-50 cursor-pointer transition-colors">14</div><div class="py-1 rounded hover:bg-sky-50 cursor-pointer transition-colors">15</div><div class="py-1 rounded hover:bg-sky-50 cursor-pointer transition-colors">16</div><div class="py-1 rounded hover:bg-sky-50 cursor-pointer transition-colors">17</div><div class="py-1 rounded hover:bg-sky-50 cursor-pointer transition-colors">18</div>
                     </div>
                 </div>
             </div>
 
-            <!-- PAGE 2: สรวงสวรรค์คนรักแมว (Mon & Moji Virtual Lounge) -->
+            <!-- PAGE 2: สรวงสวรรค์คนรักแมว (Lounge) -->
             <div id="page-2" class="page-transition w-full page-inactive">
                 <div class="bg-white/80 backdrop-blur-md rounded-3xl p-6 shadow-xl border-2 border-sky-100 text-center">
-                    <h2 class="text-xl font-bold text-sky-600 mb-1"><i class="fa-solid fa-paw mr-1 text-amber-500"></i> ม่อน & โมจิ เมี๊ยวเลาจน์</h2>
-                    <p class="text-xs text-slate-400 mb-4">ลองลูบแก้มหรือแตะหัวลูกๆ ทั้งสองตัวสิคะ เมี๊ยววว</p>
+                    <h2 class="text-xl font-bold text-sky-600 mb-1"><i class="fa-solid fa-paw mr-1 text-amber-500"></i> ไอ้ม่อน & โมจิ เมี๊ยวสเปซ</h2>
+                    <p class="text-xs text-slate-400 mb-4">ฟีลๆ ลองลูบแก้มหรือแตะหัวลูกๆ ดูสิฮับ</p>
                     
                     <div class="grid grid-cols-2 gap-4 my-2">
-                        <!-- แตะเล่นไอ้ม่อน (แมวบ้านสีส้ม) -->
                         <div onclick="petCat(event, 'mon')" class="cat-card-container bg-[#fffbeb] hover:bg-[#fef3c7] border border-amber-200 rounded-2xl p-3 cursor-pointer transform hover:scale-[1.03] transition-all relative overflow-hidden active:scale-95 select-none">
                             <div class="w-24 h-24 mx-auto cat-bounce relative">
                                 <svg viewBox="0 0 100 100" class="w-full h-full">
                                     <circle cx="50" cy="50" r="38" fill="#fed7aa" stroke="#f97316" stroke-width="1.5" />
-                                    <!-- หูตั้ง -->
                                     <polygon points="20,25 35,10 40,28" fill="#fed7aa" class="cat-ear-l" />
                                     <polygon points="80,25 65,10 60,28" fill="#fed7aa" class="cat-ear-r" />
                                     <polygon points="23,23 32,14 36,25" fill="#fda4af" opacity="0.6" class="cat-ear-l" />
                                     <polygon points="77,23 68,14 64,25" fill="#fda4af" opacity="0.6" class="cat-ear-r" />
-                                    <!-- ลายส้มเข้มหน้าผากและแก้ม -->
                                     <path d="M42,20 Q50,30 58,20 L55,16 Q50,22 45,16 Z" fill="#ea580c" />
                                     <circle cx="36" cy="48" r="3" fill="#1e293b" />
                                     <circle cx="64" cy="48" r="3" fill="#1e293b" />
@@ -381,21 +342,18 @@
                                 </svg>
                             </div>
                             <p class="font-bold text-amber-700 text-sm mt-2">🐱 ไอ้ม่อน 🐱</p>
-                            <span class="text-[10px] bg-amber-100 px-2 py-0.5 rounded text-amber-800">แมวบ้านส้มสุดซ่า</span>
+                            <span class="text-[10px] bg-amber-100 px-2 py-0.5 rounded text-amber-800">แมวบ้านส้มตัวตึง</span>
                         </div>
 
-                        <!-- แตะเล่นต้าวโมจิ (แมวสกอตติชขาวหูพับ) -->
                         <div onclick="petCat(event, 'moji')" class="cat-card-container bg-sky-50 hover:bg-sky-100 border border-sky-200 rounded-2xl p-3 cursor-pointer transform hover:scale-[1.03] transition-all relative overflow-hidden active:scale-95 select-none">
                             <div class="w-24 h-24 mx-auto cat-bounce relative">
                                 <svg viewBox="0 0 100 100" class="w-full h-full">
                                     <circle cx="50" cy="50" r="38" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5" />
-                                    <!-- หูพับแบบสกอตติช -->
                                     <path d="M 23,28 C 18,22 28,18 31,27 C 30,29 26,30 23,28 Z" fill="#e2e8f0" class="cat-ear-l" />
                                     <path d="M 24,29 C 21,24 27,21 29,28 C 28,29 26,30 24,29 Z" fill="#fda4af" opacity="0.6" class="cat-ear-l" />
                                     <path d="M 77,28 C 82,22 72,18 69,27 C 70,29 74,30 77,28 Z" fill="#e2e8f0" class="cat-ear-r" />
                                     <path d="M 76,29 C 79,24 73,21 71,28 C 72,29 74,30 76,29 Z" fill="#fda4af" opacity="0.6" class="cat-ear-r" />
-                                    
-                                    <circle cx="36" cy="48" r="3" fill="#0ea5e9" /> <!-- ตาฟ้าพิเศษแบบโมจิ -->
+                                    <circle cx="36" cy="48" r="3" fill="#0ea5e9" />
                                     <circle cx="64" cy="48" r="3" fill="#0ea5e9" />
                                     <path d="M47,54 Q50,56 50,54 Q50,56 53,54" stroke="#1e293b" stroke-width="2" fill="none" />
                                     <ellipse cx="30" cy="54" rx="4" ry="2" fill="#fda4af" opacity="0.6" />
@@ -403,40 +361,35 @@
                                 </svg>
                             </div>
                             <p class="font-bold text-sky-700 text-sm mt-2">🐱 ต้าวโมจิ 🐱</p>
-                            <span class="text-[10px] bg-sky-200 px-2 py-0.5 rounded text-sky-600">สกอตติชหูพับขาวฟู</span>
+                            <span class="text-[10px] bg-sky-200 px-2 py-0.5 rounded text-sky-600">สกอตติชหูพับนุ่มนิ่ม</span>
                         </div>
                     </div>
 
-                    <!-- กล่องคำพูดแมวตอบรับรักแท้ -->
                     <div id="cat-chat-bubble" class="bg-amber-50 border border-amber-200 rounded-2xl p-3 text-xs text-amber-800 font-medium min-h-[48px] flex items-center justify-center">
-                        "เมี้ยวว! ยินดีต้อนรับสู่แดนแมวของไอ้ม่อนกับโมจิฮับ ลองแตะลูบหัวพวกเราดูนะแม่"
+                        "เมี้ยวว! ยินดีต้อนรับสู่แดนแมวของม่อนกับโมจิฮับ ลองลูบหัวพวกเราดูนะแม่"
                     </div>
                 </div>
             </div>
 
-            <!-- PAGE 3: ลูกเล่นปอกมังคุดแกะกลีบความรัก (Mangosteen Interactive Peeler) -->
+            <!-- PAGE 3: แกะมังคุดทายใจ ฟีลๆ สไตล์คนคลั่งรัก -->
             <div id="page-3" class="page-transition w-full page-inactive">
                 <div class="bg-white/80 backdrop-blur-md rounded-3xl p-6 shadow-xl border-2 border-sky-100 text-center">
-                    <h2 class="text-xl font-bold text-purple-700 mb-1"><i class="fa-solid fa-apple-whole mr-1 text-purple-600"></i> ปอกมังคุดแกะหัวใจ</h2>
-                    <p class="text-xs text-slate-400 mb-6">จิ้มที่มังคุดสีม่วงทีละส่วน เพื่อปอกแกะดูหัวใจที่เค้าซ่อนไว้นะคะ</p>
+                    <h2 class="text-xl font-bold text-purple-700 mb-1"><i class="fa-solid fa-apple-whole mr-1 text-purple-600"></i> แกะมังคุดทายใจ</h2>
+                    <p class="text-xs text-slate-400 mb-6">ฟีลๆ สไตล์คนคลั่งรัก จิ้มแกะทีละกลีบเลย</p>
                     
-                    <!-- โครงสร้างกลีบมังคุดแกะทีละกลีบ -->
                     <div class="relative w-48 h-48 mx-auto flex items-center justify-center">
-                        <!-- แกนรางวัลรักลึกล้ำภายใน -->
                         <div class="absolute inset-0 flex items-center justify-center z-0 bg-white border-4 border-dashed border-purple-200 rounded-full text-center p-4">
                             <p id="mangosteen-secret" class="text-xs text-purple-800 font-bold leading-normal">
-                                มังคุดที่หวานที่สุด ก็ยังไม่เท่าความรักที่เค้ามีให้เธอนะจ๊ะคนสวย 💜
+                                มังคุดที่หวานฉ่ำ ก็ยังทำถึงสู้ความรักที่เค้ามีให้เธอไม่ได้เลยนะ โฮ่งมาก! 💜
                             </p>
                         </div>
 
-                        <!-- กลีบผลชั้นนอกจำลองด้วย SVG สามารถคลิกหดตัวเปิดเผยได้ -->
                         <svg viewBox="0 0 100 100" class="absolute inset-0 w-full h-full z-10 pointer-events-none">
-                            <!-- ขั้วผลสีเขียวด้านบน -->
                             <path d="M40,20 Q50,5 60,20" stroke="#16a34a" stroke-width="4" fill="none" />
                             <ellipse cx="50" cy="22" rx="15" ry="6" fill="#15803d" />
                         </svg>
 
-                        <!-- กลีบผิวม่วงที่จะแยกตัวออกไปเมื่อกดทีละส่วน -->
+                        <!-- กลีบมังคุด -->
                         <div id="peel-segment-1" onclick="peelSlice(event, 1)" class="mangosteen-segment absolute top-10 left-4 w-20 h-28 bg-[#4c1d95] rounded-l-full border-r border-purple-900 shadow-md flex items-center justify-center text-white font-bold text-xs z-20 select-none">
                             กลีบที่ 1 🍇
                         </div>
@@ -447,168 +400,70 @@
                             กลีบที่ 3 🍇
                         </div>
                         <div id="peel-segment-4" onclick="peelSlice(event, 4)" class="mangosteen-segment absolute top-20 left-16 w-16 h-16 bg-[#6b21a8] rounded-full border border-purple-500 shadow-md flex items-center justify-center text-white font-bold text-xs z-20 select-none">
-                            กลีbที่ 4 🍇
+                            กลีบที่ 4 🍇
                         </div>
                     </div>
-                    
-                    <p class="text-[11px] text-slate-400 mt-4"><i class="fa-solid fa-circle-info mr-1"></i> ปอกให้หมด 4 กลีบเพื่อเฉลยความหวานด้านใน</p>
+                    <p class="text-[11px] text-slate-400 mt-4"><i class="fa-solid fa-circle-info mr-1"></i> ปอกให้หมด 4 กลีบเพื่อเฉลยความในใจ</p>
                 </div>
             </div>
 
-            <!-- PAGE 4: คลังภาพความทรงจำสุดลื่นไหล (Memories Gallery) -->
+            <!-- PAGE 4: อัลบั้มภาพแบบ Slider Smooth Drag -->
             <div id="page-4" class="page-transition w-full page-inactive">
-                <div class="bg-[#eef3f7] rounded-3xl p-4 shadow-xl border-4 border-[#d1dee5] text-center relative overflow-hidden min-h-[380px]">
-                    <h2 class="text-xl font-bold text-sky-600 mb-1"><i class="fa-solid fa-images mr-1 text-sky-500"></i> บอร์ดความทรงจำแสนอบอุ่น</h2>
-                    <p class="text-[10px] text-slate-500 mb-3">แตะลากย้าย หมุน สลับซ้อนภาพถ่ายคู่รักของเราสองคนได้อย่างอิสระน้า 📍</p>
+                <div class="bg-white/80 backdrop-blur-md rounded-3xl p-0 py-6 shadow-xl border-2 border-sky-100 text-center">
+                    <h2 class="text-xl font-bold text-sky-600 mb-1 px-6"><i class="fa-solid fa-images mr-1 text-pink-500"></i> Memories Album</h2>
+                    <p class="text-xs text-slate-400 mb-4 px-6">ปัดสไลด์ซ้ายขวา ดูภาพความทรงจำทำถึงของเรา 💙</p>
                     
-                    <!-- พื้นที่กระดานไม้วางภาพถ่ายคู่รัก -->
-                    <div id="polaroid-board" class="relative w-full h-[280px] bg-[#f8fafc]/60 rounded-2xl border border-sky-100/40 shadow-inner overflow-hidden select-none">
-                        <!-- แผ่นภาพจะถูกเรนเดอร์แบบ Dynamic ด้วยโมเดลระบบ Drag & Drop ของ JS ด้านล่าง -->
+                    <!-- โครงสร้างรูปภาพแบบ Slide แนวนอน ลากได้อิสระ -->
+                    <div id="gallery-slider-container" class="gallery-slider">
+                        <!-- JS จะเรนเดอร์รูปภาพลงที่นี่ -->
                     </div>
+                    
+                    <p class="text-[10px] text-slate-400 mt-2 px-6"><i class="fa-solid fa-arrows-left-right mr-1"></i> เลื่อนสไลด์ดูรูปได้เลยค๊าบ</p>
                 </div>
             </div>
 
-            <!-- PAGE 5: รวมสามเกมน่ารักกุ๊กกิ๊กแอดวานซ์ (Memory Match, Tic-Tac-Toe, Love Quiz) -->
-            <div id="page-5" class="page-transition w-full page-inactive">
-                <div class="bg-white/80 backdrop-blur-md rounded-3xl p-5 shadow-xl border-2 border-sky-100">
-                    <h2 class="text-lg font-bold text-sky-600 mb-1 text-center"><i class="fa-solid fa-gamepad mr-1 text-pink-500"></i> LOVE GAMES ARCADE</h2>
-                    <p class="text-[10px] text-center text-slate-400 mb-4">สามเกมน่ารักทบทวนสายใยความทรงจำอันมีค่า</p>
-
-                    <!-- แท็บเลือกเกม -->
-                    <div class="flex justify-center gap-1 mb-4 select-none">
-                        <button onclick="switchGame('memory')" id="tab-memory" class="text-[10px] bg-sky-500 text-white px-2.5 py-1.5 rounded-full font-semibold transition">
-                            จับคู่ภาพรัก
-                        </button>
-                        <button onclick="switchGame('tictactoe')" id="tab-tictactoe" class="text-[10px] bg-sky-50 text-sky-600 px-2.5 py-1.5 rounded-full font-semibold transition">
-                            ม่อน(ส้ม) VS โมจิ(ขาว)
-                        </button>
-                        <button onclick="switchGame('quiz')" id="tab-quiz" class="text-[10px] bg-sky-50 text-sky-600 px-2.5 py-1.5 rounded-full font-semibold transition">
-                            ควิซคนรู้ใจ
-                        </button>
+            <!-- PAGE 5: ฉากจบแสนประทับใจ (The Finale) -->
+            <div id="page-5" class="page-transition w-full page-inactive relative h-96 flex flex-col items-center justify-center text-center">
+                <!-- โพลารอยด์ฉากจบ -->
+                <div class="w-64 bg-white p-4 pb-8 rounded-xl shadow-2xl border border-slate-100 transform -rotate-2 relative z-20 mx-auto transition-transform hover:scale-105 duration-300">
+                    <!-- รูปตกแต่ง -->
+                    <div class="w-full h-40 bg-pink-50 rounded-lg overflow-hidden flex items-center justify-center border border-pink-100 relative">
+                        <span class="text-6xl text-pink-300 spring-heart-beat"><i class="fa-solid fa-champagne-glasses"></i></span>
                     </div>
-
-                    <!-- 1. เกมที่ 1: การ์ดคู่จำกัด (Memory Match) -->
-                    <div id="game-memory" class="block">
-                        <div id="memory-board" class="grid grid-cols-4 gap-1.5 max-w-sm mx-auto">
-                            <!-- JS จะเติมการ์ดในบอร์ดนี้ -->
-                        </div>
-                        <div class="text-center mt-3">
-                            <button onclick="resetMemoryGame()" class="text-[10px] text-sky-600 bg-sky-50 border border-sky-100 px-3 py-1 rounded-full hover:bg-sky-100">
-                                เริ่มเกมจับคู่ใหม่ <i class="fa-solid fa-rotate-right ml-1"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- 2. เกมที่ 2: โอเอ็กซ์ตระกูลสองเหมียว (ม่อนส้ม VS โมจิขาว) -->
-                    <div id="game-tictactoe" class="hidden text-center">
-                        <div class="text-xs mb-2 text-slate-500 font-bold" id="ttt-status">รอบของ: ไอ้ม่อน (🧡)</div>
-                        <div class="grid grid-cols-3 gap-1.5 w-44 h-44 mx-auto" id="tictactoe-board">
-                            <!-- ช่องขนาดเท่ากันเป๊ะ -->
-                            <div onclick="makeTTTMove(0)" class="ttt-cell bg-slate-50 border border-sky-100 rounded-xl flex items-center justify-center text-xl font-bold cursor-pointer h-12 w-12 transition-all"></div>
-                            <div onclick="makeTTTMove(1)" class="ttt-cell bg-slate-50 border border-sky-100 rounded-xl flex items-center justify-center text-xl font-bold cursor-pointer h-12 w-12 transition-all"></div>
-                            <div onclick="makeTTTMove(2)" class="ttt-cell bg-slate-50 border border-sky-100 rounded-xl flex items-center justify-center text-xl font-bold cursor-pointer h-12 w-12 transition-all"></div>
-                            <div onclick="makeTTTMove(3)" class="ttt-cell bg-slate-50 border border-sky-100 rounded-xl flex items-center justify-center text-xl cursor-pointer h-12 w-12 transition-all"></div>
-                            <div onclick="makeTTTMove(4)" class="ttt-cell bg-slate-50 border border-sky-100 rounded-xl flex items-center justify-center text-xl cursor-pointer h-12 w-12 transition-all"></div>
-                            <div onclick="makeTTTMove(5)" class="ttt-cell bg-slate-50 border border-sky-100 rounded-xl flex items-center justify-center text-xl cursor-pointer h-12 w-12 transition-all"></div>
-                            <div onclick="makeTTTMove(6)" class="ttt-cell bg-slate-50 border border-sky-100 rounded-xl flex items-center justify-center text-xl cursor-pointer h-12 w-12 transition-all"></div>
-                            <div onclick="makeTTTMove(7)" class="ttt-cell bg-slate-50 border border-sky-100 rounded-xl flex items-center justify-center text-xl cursor-pointer h-12 w-12 transition-all"></div>
-                            <div onclick="makeTTTMove(8)" class="ttt-cell bg-slate-50 border border-sky-100 rounded-xl flex items-center justify-center text-xl cursor-pointer h-12 w-12 transition-all"></div>
-                        </div>
-                        <div class="text-center mt-3">
-                            <button onclick="resetTTT()" class="text-[10px] text-sky-600 bg-sky-50 border border-sky-100 px-3 py-1 rounded-full hover:bg-sky-100">
-                                ล้างสนาม OX ใหม่ <i class="fa-solid fa-rotate-right ml-1"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- 3. เกมที่ 3: ควิซความรู้ใจแฟนสุดที่รัก -->
-                    <div id="game-quiz" class="hidden text-center">
-                        <div id="quiz-container" class="space-y-3">
-                            <p class="text-xs font-bold text-sky-700" id="quiz-question">คำถามที่ 1: แฟนคนสวยเกิดวันอะไรน้า?</p>
-                            <div class="flex flex-col gap-1.5 max-w-xs mx-auto">
-                                <button onclick="checkQuizAnswer(1)" class="quiz-option text-[11px] bg-sky-50 hover:bg-sky-100 border border-sky-200 p-2 rounded-xl text-left font-medium"></button>
-                                <button onclick="checkQuizAnswer(2)" class="quiz-option text-[11px] bg-sky-50 hover:bg-sky-100 border border-sky-200 p-2 rounded-xl text-left font-medium"></button>
-                                <button onclick="checkQuizAnswer(3)" class="quiz-option text-[11px] bg-sky-50 hover:bg-sky-100 border border-sky-200 p-2 rounded-xl text-left font-medium"></button>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- PAGE 6: สายด่วนเปิดใจคุยตรงๆ สบายใจ & ซองจดหมายฉลองครบรอบแสนซึ้ง -->
-            <div id="page-6" class="page-transition w-full page-inactive">
-                <div class="bg-white/80 backdrop-blur-md rounded-3xl p-6 shadow-xl border-2 border-sky-100">
-                    <h2 class="text-xl font-bold text-sky-600 mb-1 text-center"><i class="fa-solid fa-comments mr-1 text-sky-400"></i> คุยตรงใจระบายความสุข 💬</h2>
-                    <p class="text-xs text-center text-slate-400 mb-4">มีอะไรบอกเค้าได้ตรงๆ สบายใจ สัญญาว่าเค้าพร้อมรับฟังเธอเสมอนะคะ</p>
-                    
-                    <!-- ฟอร์มพิมความในใจ จำลองการคุยตรงๆ -->
-                    <div class="space-y-2 mb-6 text-xs relative">
-                        <textarea id="confess-input" rows="2" placeholder="พิมพ์ข้อความที่อยากบอกเค้าตรงนี้ได้เลยนะคะ..." class="w-full p-2.5 rounded-xl border border-sky-200 focus:outline-none focus:ring-2 focus:ring-sky-300 font-sans"></textarea>
-                        <!-- โน้ตกระดุมจดหมายบิน -->
-                        <button id="send-btn" onclick="sendDirectMessage(event)" class="w-full bg-sky-500 hover:bg-sky-600 text-white font-bold py-2 rounded-xl transition flex items-center justify-center gap-1">
-                            ส่งตรงสู่ใจแฟน <i class="fa-solid fa-paper-plane text-[10px]"></i>
-                        </button>
-                    </div>
-
-                    <!-- ซองจดหมายรักฉบับสุดท้าย -->
-                    <div class="relative w-64 h-36 mx-auto mt-4">
-                        <div id="envelope" class="envelope relative w-full h-full bg-sky-100 rounded-b-xl shadow-lg cursor-pointer border border-sky-200" onclick="toggleEnvelope(event)">
-                            <!-- ฝาครอบจดหมาย -->
-                            <div class="envelope-flap absolute top-0 inset-x-0 h-0 border-t-[60px] border-t-sky-300 border-x-[128px] border-x-transparent z-30 pointer-events-none"></div>
-                            
-                            <!-- ตราผนึกหัวใจ -->
-                            <div id="heart-seal" class="absolute top-8 left-1/2 -translate-x-1/2 z-40 bg-pink-500 text-white w-10 h-10 rounded-full shadow-md flex items-center justify-center text-lg active:scale-90 transition">
-                                <i class="fa-solid fa-heart spring-heart-beat"></i>
-                            </div>
-
-                            <!-- แผ่นกระดาษจดหมาย -->
-                            <div class="letter absolute inset-x-3 bottom-2 bg-amber-50/90 p-3 rounded shadow h-28 overflow-y-auto text-[10px] text-slate-700 z-10 leading-relaxed font-sans">
-                                <p class="font-bold text-sky-600 text-xs mb-1 text-center font-serif">จดหมายสารภาพจากต้าวแฟนตัวเงียบ ❤</p>
-                                <p class="mb-2">สุขสันต์วันครบรอบนะคะเด็กดี ขอโทษที่ช่วงนี้เค้างานเยอะ และยุ่งจนอาจดูเงียบๆ ไปบ้างนะค๊าบ เค้าไม่มีวันเปลี่ยนไป และทั้งใจมีแค่เธอคนเดียวนะ</p>
-                                <p class="mb-2">เธอคือความสุข ความมั่นใจ และความอบอุ่นใจเพียงหนึ่งเดียวของเค้าเสมอมานะค๊าบ สัญญากับเค้านะว่ามีอะไรจะคุยตรงๆ สบายใจได้เสมอกับเค้านะคะ</p>
-                                <p class="font-bold text-right text-pink-500 mt-2">- ตกหลุมรักต้าว 155 ซม. ตลอดกาล -</p>
-                            </div>
-
-                            <!-- ปีกหน้าซองบังตา -->
-                            <div class="absolute bottom-0 inset-x-0 h-24 bg-sky-100 rounded-b-xl z-25 border-t border-sky-200 overflow-hidden">
-                                <svg viewBox="0 0 100 100" preserveAspectRatio="none" class="absolute inset-0 w-full h-full fill-sky-200">
-                                    <polygon points="0,100 50,50 100,100" />
-                                </svg>
-                            </div>
-                        </div>
+                    <!-- ข้อความจบคูลๆ -->
+                    <div class="mt-6">
+                        <p class="text-xl font-extrabold text-slate-800 font-serif tracking-tight">9.2 years</p>
+                        <p class="text-base text-pink-500 font-semibold mb-2">and counting...</p>
+                        <p class="text-xs text-slate-500 font-medium bg-slate-50 py-1.5 rounded-full shadow-sm">Happy Anniversary! 🥂</p>
                     </div>
                 </div>
             </div>
 
         </div>
 
-        <!-- แถบนำทางการเปิดเป็นหน้าๆ (Navigation Bar) -->
-        <footer class="mt-4 flex flex-col items-center gap-2 bg-white/70 backdrop-blur-md p-4 rounded-3xl border border-sky-100 shadow-sm select-none">
-            <!-- จุดบอกตำแหน่งหน้าปัจจุบัน -->
+        <!-- แถบนำทางการเปิดเป็นหน้าๆ -->
+        <footer class="mt-4 flex flex-col items-center gap-2 bg-white/70 backdrop-blur-md p-4 rounded-3xl border border-sky-100 shadow-sm select-none z-30">
             <div class="flex gap-2" id="progress-dots">
                 <span class="w-2 h-2 rounded-full bg-sky-400 transition-all duration-300"></span>
                 <span class="w-2 h-2 rounded-full bg-sky-100 transition-all duration-300"></span>
                 <span class="w-2 h-2 rounded-full bg-sky-100 transition-all duration-300"></span>
                 <span class="w-2 h-2 rounded-full bg-sky-100 transition-all duration-300"></span>
                 <span class="w-2 h-2 rounded-full bg-sky-100 transition-all duration-300"></span>
-                <span class="w-2 h-2 rounded-full bg-sky-100 transition-all duration-300"></span>
             </div>
 
-            <!-- ปุ่มเปลี่ยนหน้า ถอยหลัง / ไปต่อ -->
             <div class="flex justify-between w-full mt-2">
                 <button id="prev-btn" onclick="changePage(-1)" class="bg-[#faf6f0] text-sky-600 border border-sky-200 px-5 py-1.5 rounded-full font-bold active:scale-95 transition text-xs opacity-50 cursor-not-allowed" disabled>
                     <i class="fa-solid fa-arrow-left mr-1"></i> ถอยกลับ
                 </button>
                 <button id="next-btn" onclick="changePage(1)" class="bg-sky-400 hover:bg-sky-500 text-white px-7 py-1.5 rounded-full font-bold active:scale-95 transition text-xs shadow-md">
-                    เปิดสเต็ปถัดไป <i class="fa-solid fa-arrow-right ml-1"></i>
+                    ไปต่อกัน <i class="fa-solid fa-arrow-right ml-1"></i>
                 </button>
             </div>
         </footer>
 
     </div>
 
-    <!-- กล่องเซอร์ไพรส์แจ้งสิทธิ์ต่างๆ (Modal Surprise Box) -->
+    <!-- กล่องเซอร์ไพรส์แจ้งสิทธิ์ -->
     <div id="surprise-modal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-white rounded-3xl max-w-sm w-full p-6 text-center border-4 border-sky-200 shadow-2xl relative">
             <div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-sky-400 text-white w-16 h-16 rounded-full flex items-center justify-center text-3xl border-4 border-white shadow-md">
@@ -617,11 +472,10 @@
             <h3 class="text-xl font-bold text-sky-600 mt-6 mb-2" id="modal-title">ยินดีด้วยค่ะ! ❤</h3>
             <p class="text-slate-500 text-xs mb-4" id="modal-desc">สิทธิพิเศษที่คุณได้รับมอบหมาย:</p>
             
-            <!-- ดีไซน์คูปองรักพรีเมียมสีฟ้าครีม -->
             <div class="bg-amber-50/50 border-2 border-dashed border-amber-300 rounded-2xl p-4 mb-4 relative">
                 <div class="absolute right-3 top-3 text-amber-200 text-2xl opacity-50"><i class="fa-solid fa-paw"></i></div>
                 <p id="surprise-text" class="text-lg font-bold text-sky-600 select-all">คูปองป้อนมังคุดแสนหวาน 🍇</p>
-                <p class="text-[9px] text-slate-400 mt-2">สิทธิ์นี้สามารถยื่นมาให้เค้าปรนนิบัติใจเธอได้เสมอน้า!</p>
+                <p class="text-[9px] text-slate-400 mt-2">สิทธิ์นี้สามารถยื่นมาให้เค้าทำตามใจเธอได้เลยน้า!</p>
             </div>
             
             <button onclick="closeSurpriseModal()" class="w-full bg-sky-400 hover:bg-sky-500 text-white font-semibold py-2 rounded-full transition active:scale-95 shadow-md">
@@ -630,37 +484,11 @@
         </div>
     </div>
 
-    <!-- Lightbox Modal สำหรับซูมและสไลด์รูปภาพแกลเลอรีแบบพรีเมียม -->
-    <div id="lightbox-modal" class="fixed inset-0 bg-black/80 z-50 flex flex-col items-center justify-center p-4 hidden transition-opacity duration-300" onclick="closeLightbox(event)">
-        <div class="relative max-w-sm w-full bg-white p-4 pb-6 rounded-3xl border-4 border-sky-200 shadow-2xl transform scale-90 transition-transform duration-300" id="lightbox-card" onclick="event.stopPropagation()">
-            <!-- ปุ่มปิด -->
-            <button onclick="closeLightbox(event)" class="absolute -top-3 -right-3 w-8 h-8 bg-pink-500 hover:bg-pink-600 text-white rounded-full flex items-center justify-center shadow-lg active:scale-90 transition z-50">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            
-            <!-- ภาพหลัก -->
-            <div class="w-full h-80 bg-sky-50/50 rounded-2xl overflow-hidden border border-slate-200 relative flex items-center justify-center">
-                <img id="lightbox-img" src="" alt="Our Memory" class="w-full h-full object-cover rounded-xl">
-            </div>
-            
-            <div class="flex justify-center items-center mt-4">
-                <span class="text-pink-500 text-lg spring-heart-beat"><i class="fa-solid fa-heart"></i></span>
-            </div>
-            
-            <!-- ปุ่มเปลี่ยนรูปถอยหลัง/ไปต่อใน Lightbox -->
-            <div class="flex justify-between items-center mt-4 px-2">
-                <button onclick="navigateLightbox(-1)" class="text-xs font-bold text-sky-600 bg-sky-50 hover:bg-sky-100 px-3 py-1.5 rounded-full"><i class="fa-solid fa-chevron-left mr-1"></i> ก่อนหน้า</button>
-                <button onclick="navigateLightbox(1)" class="text-xs bg-sky-400 hover:bg-sky-500 text-white px-5 py-1.5 rounded-full font-bold shadow-sm">ถัดไป <i class="fa-solid fa-chevron-right ml-1"></i></button>
-            </div>
-        </div>
-    </div>
-
     <script>
         // --- 1. หน้าหลักและแอปพลิเคชัน ---
         let currentPage = 1;
-        const totalPages = 6; // หน้าทั้งหมดมี 6 หน้าสมบูรณ์
+        const totalPages = 5;
 
-        // 3D Card Tilt Physics
         function initTiltEffect() {
             const cards = document.querySelectorAll('.tilt-card');
             cards.forEach(card => {
@@ -668,12 +496,9 @@
                     const rect = card.getBoundingClientRect();
                     const x = e.clientX - rect.left - rect.width / 2;
                     const y = e.clientY - rect.top - rect.height / 2;
-                    
-                    // ปรับค่าแรงหน่วงเพื่อให้การหมุนพริ้วไหวเป็นธรรมชาติ
                     card.style.transform = `perspective(1000px) rotateX(${-y / 12}deg) rotateY(${x / 12}deg) scale3d(1.01, 1.01, 1.01)`;
                     card.style.boxShadow = `0 25px 50px -12px rgba(14, 165, 233, 0.15)`;
                 });
-
                 card.addEventListener('mouseleave', () => {
                     card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
                     card.style.boxShadow = ``;
@@ -695,20 +520,17 @@
                 cover.style.display = 'none';
                 main.classList.remove('hidden');
                 
-                // เริ่มระบบเพจแรก
-                resetMemoryGame();
-                renderGallery(); // สร้างแกลเลอรีรูปภาพ
+                renderGallery(); // โหลดรูปสไลเดอร์หน้า 4
+                setupGalleryDrag(); // เรียกใช้สคริปต์สไลด์ด้วยเมาส์
                 setActivePage(1);
                 initTiltEffect();
                 
-                // ไม้บรรทัดสไลด์ดึ๋ง
                 setTimeout(() => {
                     const bar = document.getElementById('height-bar');
                     if (bar) bar.style.width = '60%';
                 }, 500);
             }, 800);
             
-            // ปล่อยสิ่งปลิวเบาๆ ในฉากหลัง
             setInterval(createAmbientParticle, 1200);
         }
 
@@ -718,6 +540,20 @@
                 if (pageEl) {
                     if (i === pageNum) {
                         pageEl.className = "page-transition w-full page-active";
+                        
+                        // แอนิเมชันสำหรับเกจวัดส่วนสูงในหน้า 1
+                        if(pageNum === 1) {
+                            const bar = document.getElementById('height-bar');
+                            if(bar) {
+                                bar.style.width = '0%';
+                                setTimeout(() => { bar.style.width = '60%'; }, 700);
+                            }
+                        }
+
+                        // ตรวจสอบถ้าเปิดหน้าสุดท้าย ให้ยิงพลุ
+                        if(pageNum === 5) {
+                            setTimeout(fireConfetti, 400);
+                        }
                     } else {
                         pageEl.className = "page-transition w-full page-inactive";
                     }
@@ -733,7 +569,6 @@
             setActivePage(nextP);
             currentPage = nextP;
 
-            // อัปเดตปุ่มการควบคุม
             const prevBtn = document.getElementById('prev-btn');
             const nextBtn = document.getElementById('next-btn');
             
@@ -750,7 +585,7 @@
             }
 
             updateProgressDots();
-            playSoundTone(523.25, 0.15); // เล่นเสียงเปียโนนุ่มละมุน
+            playSoundTone(523.25, 0.15);
         }
 
         function updateProgressDots() {
@@ -766,40 +601,22 @@
             }
         }
 
-        // --- STREAMING_CHUNK: Initializing tone generator with Web Audio API ---
-        // --- 2. เสียงเปียโนสังเคราะห์แสนอบอุ่น (Web Audio API) ---
+        // --- 2. เสียงเปียโนบรรเลง (Web Audio API) ---
         let audioCtx = null;
         let melodyInterval = null;
         let isMusicPlaying = false;
-
         const loveMelody = [
-            { note: "E5", duration: 0.6, time: 0 },
-            { note: "G5", duration: 0.6, time: 0.6 },
-            { note: "C6", duration: 1.2, time: 1.2 },
-            { note: "B5", duration: 0.6, time: 2.4 },
-            { note: "A5", duration: 0.6, time: 3.0 },
-            { note: "G5", duration: 1.2, time: 3.6 },
-            { note: "A5", duration: 0.6, time: 4.8 },
-            { note: "C5", duration: 0.6, time: 5.4 },
-            { note: "F5", duration: 1.2, time: 6.0 },
-            { note: "E5", duration: 0.6, time: 7.2 },
-            { note: "D5", duration: 0.6, time: 7.8 },
-            { note: "C5", duration: 1.8, time: 8.4 }
+            { note: "E5", duration: 0.6, time: 0 }, { note: "G5", duration: 0.6, time: 0.6 },
+            { note: "C6", duration: 1.2, time: 1.2 }, { note: "B5", duration: 0.6, time: 2.4 },
+            { note: "A5", duration: 0.6, time: 3.0 }, { note: "G5", duration: 1.2, time: 3.6 },
+            { note: "A5", duration: 0.6, time: 4.8 }, { note: "C5", duration: 0.6, time: 5.4 },
+            { note: "F5", duration: 1.2, time: 6.0 }, { note: "E5", duration: 0.6, time: 7.2 },
+            { note: "D5", duration: 0.6, time: 7.8 }, { note: "C5", duration: 1.8, time: 8.4 }
         ];
-
-        const noteFreqs = {
-            "C5": 523.25, "D5": 587.33, "E5": 659.25, "F5": 698.46,
-            "G5": 783.99, "A5": 880.00, "B5": 987.77, "C6": 1046.50
-        };
+        const noteFreqs = { "C5": 523.25, "D5": 587.33, "E5": 659.25, "F5": 698.46, "G5": 783.99, "A5": 880.00, "B5": 987.77, "C6": 1046.50 };
 
         function initAudio() {
-            try {
-                if (!audioCtx) {
-                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                }
-            } catch (e) {
-                console.warn("ระบบเสียงกล่องดนตรีไม่ได้รับการอนุมัติจากเบราว์เซอร์:", e);
-            }
+            try { if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) {}
         }
 
         function playSoundTone(freq, duration) {
@@ -815,9 +632,7 @@
                 gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
                 osc.start();
                 osc.stop(audioCtx.currentTime + duration);
-            } catch (e) {
-                // หลบเลี่ยงข้อผิดพลาดหาก AudioContext ถูกปิดกั้นชั่วคราว
-            }
+            } catch (e) {}
         }
 
         function playMelodyLoop() {
@@ -850,47 +665,31 @@
             }
         }
 
-        // --- STREAMING_CHUNK: Coding the advanced physics-based burst on click events ---
-        // --- 3. ตกแต่งบรรยากาศและแอนิเมชันปิ๊งๆ (Defensive Particle Design) ---
+        // --- 3. แอนิเมชันปิ๊งๆ และพลุกระดาษ (Confetti) ---
         function spawnAdvancedBurst(event) {
             const container = document.getElementById('ambient-container');
             if (!container) return;
-
-            let x = window.innerWidth / 2;
-            let y = window.innerHeight / 2;
-
-            if (event) {
-                const rect = event.target && typeof event.target.getBoundingClientRect === 'function' ? event.target.getBoundingClientRect() : null;
-                x = event.clientX || (rect ? rect.left + rect.width / 2 : window.innerWidth / 2);
-                y = event.clientY || (rect ? rect.top + rect.height / 2 : window.innerHeight / 2);
-            }
+            const rect = event.target && typeof event.target.getBoundingClientRect === 'function' ? event.target.getBoundingClientRect() : null;
+            const x = event.clientX || (rect ? rect.left + rect.width / 2 : window.innerWidth / 2);
+            const y = event.clientY || (rect ? rect.top + rect.height / 2 : window.innerHeight / 2);
             
-            playSoundTone(880, 0.2);
-            setTimeout(() => playSoundTone(1046.5, 0.3), 100);
-
-            const iconsArray = ['💖', '🍊', '🤍', '🐾', '🍇', '✨', '💙'];
+            playSoundTone(880, 0.2); setTimeout(() => playSoundTone(1046.5, 0.3), 100);
+            const iconsArray = ['💖', '🍊', '🤍', '🐾', '🍇', '✨'];
             
             for (let i = 0; i < 30; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'absolute pointer-events-none z-50';
-                
                 const emoji = iconsArray[Math.floor(Math.random() * iconsArray.length)];
                 particle.innerHTML = `<span class="inline-block transform transition-all duration-[1000ms] ease-out" style="transform: scale(0)">${emoji}</span>`;
-                
-                particle.style.left = x + 'px';
-                particle.style.top = y + 'px';
+                particle.style.left = x + 'px'; particle.style.top = y + 'px';
                 container.appendChild(particle);
 
-                // สุ่มองศาและระยะทางทิศทางกระจายตัวรอบด้าน
                 const angle = Math.random() * Math.PI * 2;
                 const distance = 80 + Math.random() * 160;
-                
-                // แรงเหวี่ยงสุ่มความสูงต่ำ
                 const targetX = Math.cos(angle) * distance;
-                const targetY = Math.sin(angle) * distance - 80; // เหวี่ยงตัวโค้งขึ้นด้านบนเล็กน้อย
-                const spin = Math.random() * 720 - 360; // สุ่มหมุนควงรอบตัว
+                const targetY = Math.sin(angle) * distance - 80;
+                const spin = Math.random() * 720 - 360;
 
-                // เริ่มทำลายอนิเมชันหลังคำนวณตำแหน่งเสร็จสิ้น
                 requestAnimationFrame(() => {
                     const span = particle.querySelector('span');
                     if (span) {
@@ -898,482 +697,146 @@
                         span.style.opacity = '0';
                     }
                 });
-
-                // ล้างขยะลบส่วนเกินออกจาก DOM
-                setTimeout(() => {
-                    particle.remove();
-                }, 1100);
+                setTimeout(() => particle.remove(), 1100);
             }
         }
 
-        // --- STREAMING_CHUNK: Coding interaction with Mon and Moji with ripple visual effects ---
-        // --- 4. การลูบหัวสุ่มเล่นกับน้องเหมียวสองแสบ พร้อมคลื่นกระเพื่อมเสียงคราง (Purr Wave) ---
+        function createAmbientParticle() {
+            const container = document.getElementById('ambient-container');
+            if (!container) return;
+            const particle = document.createElement('div');
+            particle.classList.add('ambient-particle');
+            const items = ['<i class="fa-solid fa-heart text-pink-300"></i>', '<i class="fa-solid fa-cat text-sky-200"></i>', '<i class="fa-solid fa-apple-whole text-purple-300"></i>'];
+            particle.innerHTML = items[Math.floor(Math.random() * items.length)];
+            particle.style.setProperty('--drift-x', (Math.random() * 200 - 100) + 'px');
+            particle.style.setProperty('--drift-angle', (Math.random() * 360) + 'deg');
+            particle.style.setProperty('--drift-scale', (0.6 + Math.random() * 0.9));
+            particle.style.setProperty('--drift-duration', (6 + Math.random() * 6) + 's');
+            particle.style.left = Math.random() * 100 + 'vw';
+            container.appendChild(particle);
+            setTimeout(() => particle.remove(), 12000);
+        }
+
+        function fireConfetti() {
+            const page5 = document.getElementById('page-5');
+            if(!page5) return;
+            playSoundTone(523.25, 0.1); setTimeout(() => playSoundTone(659.25, 0.15), 100); setTimeout(() => playSoundTone(1046.5, 0.4), 200);
+            const colors = ['#f43f5e', '#38bdf8', '#fbbf24', '#a78bfa', '#34d399'];
+            for(let i=0; i<80; i++) {
+                const conf = document.createElement('div');
+                conf.className = 'confetti';
+                conf.style.left = Math.random() * 100 + '%';
+                conf.style.top = '-20px';
+                conf.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                conf.style.animation = `makeItRain ${Math.random() * 2 + 1.5}s cubic-bezier(0.25, 1, 0.5, 1) forwards`;
+                page5.appendChild(conf);
+                setTimeout(() => conf.remove(), 4000);
+            }
+        }
+
+        // --- 4. การลูบหัวเหมียว ---
+        const catQuotes = {
+            mon: ["ม่อนส้ม: พ่อรักแม่ที่สุดเลยฮับ เค้าบอกม่อนทุกวัน!", "ม่อนส้ม: พ่อชอบแอบยิ้มตอนดูรูปแม่ล่ะ เมี๊ยว!", "ม่อนส้ม: รับประกันความคลั่งรักของพ่อเลยฮับเมี๊ยว!"],
+            moji: ["โมจิเมี๊ยว: แม่คนสวยเกิดวันเสาร์สูง 155 แต่อุ้มโมจิสกอตติชได้สบายเมี๊ยว!", "โมจิเมี๊ยว: ถึงพ่อจะยุ่งๆ แต่ใจพ่อคิดถึงแม่ตลอดนะเมี๊ยว", "โมจิเมี๊ยว: ฟีลๆ สบายๆ ความรักพ่อแกร่งดั่งหินผาเมี๊ยว!"]
+        };
+
         function petCat(event, catId) {
             playSoundTone(880, 0.1);
             const list = catQuotes[catId];
-            const randomQuote = list[Math.floor(Math.random() * list.length)];
-            document.getElementById('cat-chat-bubble').innerText = randomQuote;
-
-            // คลื่นวงกระเพื่อมแผ่ออกมาตรงจุดสัมผัสเมาส์ลูบหัว
+            document.getElementById('cat-chat-bubble').innerText = list[Math.floor(Math.random() * list.length)];
             const card = event.currentTarget;
             if (card) {
                 const rect = card.getBoundingClientRect();
-                const posX = event.clientX - rect.left;
-                const posY = event.clientY - rect.top;
-
                 const wave = document.createElement('div');
                 wave.className = 'purr-wave';
-                wave.style.left = posX + 'px';
-                wave.style.top = posY + 'px';
+                wave.style.left = (event.clientX - rect.left) + 'px';
+                wave.style.top = (event.clientY - rect.top) + 'px';
                 card.appendChild(wave);
-
-                setTimeout(() => {
-                    wave.remove();
-                }, 1000);
+                setTimeout(() => wave.remove(), 1000);
             }
         }
 
-        // --- 5. เกมหักกลีบมังคุดฟิสิกส์หลุดปลิวร่วงหล่น ---
+        // --- 5. เกมหักกลีบมังคุดฟิสิกส์ ---
         let peeledCount = 0;
         function peelSlice(event, sliceNum) {
             const seg = document.getElementById(`peel-segment-${sliceNum}`);
             if (!seg || seg.style.opacity === '0') return;
-            
             playSoundTone(659.25, 0.15);
-            
-            // แฟนตาซีแกะเปลือกมังคุดแบบสมจริง! หลุดลอยปลิวและหมุนเคว้งตกลงด้านล่าง
             seg.style.transform = 'scale(0.2) translate(-200px, -200px)';
             seg.style.opacity = '0';
             peeledCount++;
-            
             if (peeledCount === 4) {
                 setTimeout(() => {
-                    playSoundTone(880, 0.2);
-                    setTimeout(() => playSoundTone(1046.5, 0.3), 100);
-                    showSurpriseModal("ปอกมังคุดเนื้อหวานฉ่ำ! 🍇", "ความจริงใจที่ปอกหมดใจเผยออกแล้วนะจ๊ะ", "หัวใจมังคุดขาวผ่องเหมือนความรักที่มั่นคงและมีแต่เธอคนเดียวเท่านั้น 💜");
+                    playSoundTone(880, 0.2); setTimeout(() => playSoundTone(1046.5, 0.3), 100);
+                    showSurpriseModal("ปอกมังคุดหมดใจ! 🍇", "ความในใจทั้งหมดเปิดเผยแล้วจ้า", "มังคุดที่ว่าหวานยังสู้ความคลั่งรักที่เค้ามีให้เธอไม่ได้เลย 💜");
                 }, 800);
             }
         }
 
-        // --- STREAMING_CHUNK: Setting up draggable organic polaroid stream from workspace files ---
-        // --- 6. คลังรูปภาพความทรงจำจริงแสนสวย (Photo Gallery) & ระบบ Lightbox ---
-        
-        // ฐานข้อมูลรูปภาพที่ดึงจากภาพที่คุณอัปโหลดโดยตรง เพื่อความเสถียรและสวยงามสูงสุด
+        // --- 6. แกลเลอรีรูปภาพแบบลากสไลด์ (Slide & Drag) โดยใช้ลิงก์ตรงจาก Pic.in.th ---
         const photoGallery = [
-            { url: "S__11493379_0.jpg", date: "Our Memories" },
-            { url: "S__11493380_0.jpg", date: "Sweet Smile" },
-            { url: "S__11493381_0.jpg", date: "Happy Day" },
-            { url: "S__11493382_0.jpg", date: "Love Flower" },
-            { url: "S__11493383_0.jpg", date: "Night Out" },
-            { url: "S__11493384_0.jpg", date: "Close to You" }
+            "https://img2.pic.in.th/S__11493379_0.jpg", 
+            "https://img2.pic.in.th/S__11493380_02a2aa8186996cca6.jpg", 
+            "https://img1.pic.in.th/images/S__11493381_0e265bfceb0361d8a.jpg", 
+            "https://img2.pic.in.th/S__11493382_075d8613439408eb0.jpg", 
+            "https://img1.pic.in.th/images/S__11493383_0.jpg", 
+            "https://img1.pic.in.th/images/S__11493384_0.jpg"
         ];
 
-        let activeLightboxIndex = 0;
-
-        // เรนเดอร์รูปภาพในรูปแบบกระดาน Polaroid ที่สามารถใช้เมาส์แตะลากย้าย หมุน และสลับซ้อนได้อย่างเป็นธรรมชาติ
         function renderGallery() {
-            const board = document.getElementById('polaroid-board');
-            if (!board) return;
-            board.innerHTML = '';
+            const container = document.getElementById('gallery-slider-container');
+            if (!container) return;
+            container.innerHTML = '';
             
-            photoGallery.forEach((photo, index) => {
-                const polaroid = document.createElement('div');
-                
-                // กำหนดคลาสและสไตล์พื้นฐานของแผ่นภาพความทรงจำ
-                polaroid.className = "absolute gallery-polaroid bg-white p-2 pb-5 rounded-lg shadow-md border border-slate-100 cursor-grab active:cursor-grabbing select-none w-28 md:w-32 transition-transform duration-200";
-                polaroid.style.touchAction = "none"; // ป้องกันการสกรอลล์ขณะลากบนมือถือ
-                
-                // สุ่มตำแหน่งเริ่มต้นของภาพให้อัดแน่นเรียงซ้อนแบบดูเป็นศิลปะใจกลางบอร์ด
-                const initialLeft = 20 + (index * 12) + (Math.random() * 15);
-                const initialTop = 15 + (index * 8) + (Math.random() * 12);
-                const initialRotation = (Math.random() * 20) - 10;
-                
-                polaroid.style.left = `${initialLeft}%`;
-                polaroid.style.top = `${initialTop}px`;
-                polaroid.style.transform = `rotate(${initialRotation}deg)`;
-                polaroid.style.zIndex = index + 5;
-                
-                polaroid.innerHTML = `
-                    <!-- ตัวหนีบรูปหัวใจตกแต่งสุดชิค -->
-                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 text-pink-400 text-sm z-30 drop-shadow-sm">
-                        <i class="fa-solid fa-heart spring-heart-beat"></i>
+            photoGallery.forEach((url, index) => {
+                const item = document.createElement('div');
+                item.className = "gallery-item bg-white p-2.5 pb-4 rounded-xl shadow-md border border-slate-100 select-none";
+                item.innerHTML = `
+                    <div class="w-full h-48 bg-sky-50/50 rounded-lg overflow-hidden border border-slate-100 flex items-center justify-center text-center p-2">
+                        <img src="${url}" class="gallery-image w-full h-full object-cover" draggable="false" onerror="this.onerror=null; this.outerHTML='<div class=\\'flex flex-col items-center justify-center w-full h-full bg-slate-50\\'><i class=\\'fa-solid fa-image text-2xl text-sky-300 mb-2\\'></i><span class=\\'text-[10px] text-slate-400\\'>Loading...</span></div>';">
                     </div>
-                    <div class="w-full h-24 bg-sky-50 rounded-md overflow-hidden relative border border-slate-100 pointer-events-none">
-                        <img src="${photo.url}" alt="Memory" class="w-full h-full object-cover">
-                    </div>
-                    <div class="flex justify-center items-center mt-2 pointer-events-none">
-                        <span class="text-pink-400 text-[9px]"><i class="fa-solid fa-heart"></i></span>
+                    <div class="flex justify-center items-center mt-3">
+                        <span class="text-pink-400 text-sm spring-heart-beat"><i class="fa-solid fa-heart"></i></span>
                     </div>
                 `;
-                
-                // เพิ่มอีเวนต์สำหรับระบบ Drag and Drop ขั้นแอดวานซ์
-                setupDragAndDrop(polaroid, index);
-                
-                board.appendChild(polaroid);
+                container.appendChild(item);
             });
         }
 
-        // --- STREAMING_CHUNK: Coding the advanced touch and pointer drag interaction with Z-index lifting ---
-        // ระบบ Drag and Drop สมบูรณ์แบบ รองรับเมาส์และทัชบนหน้าจอสัมผัส
-        let highestZ = 50;
+        // ฟังก์ชันลากเมาส์สไลด์ (Drag to scroll)
+        function setupGalleryDrag() {
+            const slider = document.getElementById('gallery-slider-container');
+            if(!slider) return;
+            let isDown = false;
+            let startX;
+            let scrollLeft;
 
-        function setupDragAndDrop(element, index) {
-            let isDragging = false;
-            let startX, startY;
-            let currentX = 0;
-            let currentY = 0;
-            
-            // ดับเบิ้ลคลิกเพื่อซูมเปิด Lightbox ขนาดพรีเมียม
-            element.addEventListener('dblclick', (e) => {
-                openLightbox(e, index);
+            slider.addEventListener('mousedown', (e) => {
+                isDown = true;
+                slider.style.scrollSnapType = 'none';
+                startX = e.pageX - slider.offsetLeft;
+                scrollLeft = slider.scrollLeft;
             });
-
-            // รองรับทั้งเมาส์และหน้าจอทัชสกรีน
-            element.addEventListener('pointerdown', (e) => {
-                isDragging = true;
-                element.style.transition = "none"; // หยุดอนิเมชันลอยชั่วขณะเมื่อถูกจับลาก
-                
-                // ดึง Z-index ขึ้นสูงสุดเพื่อให้มาซ้อนทับภาพอื่นๆ ชั่วขณะ
-                highestZ++;
-                element.style.zIndex = highestZ;
-                
-                startX = e.clientX - element.offsetLeft;
-                startY = e.clientY - element.offsetTop;
-                element.setPointerCapture(e.pointerId);
-            });
-
-            element.addEventListener('pointermove', (e) => {
-                if (!isDragging) return;
-                
-                const board = document.getElementById('polaroid-board');
-                const boardRect = board.getBoundingClientRect();
-                
-                // คำนวณพิกัดการเคลื่อนที่ของภาพขอบเขตกระดาน
-                let newLeft = e.clientX - startX;
-                let newTop = e.clientY - startY;
-                
-                // บังคับขอบเขตป้องกันแผ่นรูปภาพลื่นหลุดออกนอกกระดาน
-                if (newLeft < -10) newLeft = -10;
-                if (newLeft > boardRect.width - element.clientWidth + 10) newLeft = boardRect.width - element.clientWidth + 10;
-                if (newTop < -10) newTop = -10;
-                if (newTop > boardRect.height - element.clientHeight + 10) newTop = boardRect.height - element.clientHeight + 10;
-                
-                element.style.left = `${newLeft}px`;
-                element.style.top = `${newTop}px`;
-            });
-
-            element.addEventListener('pointerup', (e) => {
-                if (!isDragging) return;
-                isDragging = false;
-                element.releasePointerCapture(e.pointerId);
-                
-                // หมุนตัวรูปภาพสุ่มอีกเล็กน้อยเพื่อให้สวยงามอย่างมีชั้นเชิง
-                const finalRotation = (Math.random() * 16) - 8;
-                element.style.transition = "transform 0.4s ease";
-                element.style.transform = `rotate(${finalRotation}deg)`;
+            slider.addEventListener('mouseleave', () => { isDown = false; slider.style.scrollSnapType = 'x mandatory'; });
+            slider.addEventListener('mouseup', () => { isDown = false; slider.style.scrollSnapType = 'x mandatory'; });
+            slider.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - slider.offsetLeft;
+                const walk = (x - startX) * 2; 
+                slider.scrollLeft = scrollLeft - walk;
             });
         }
 
-        // --- STREAMING_CHUNK: Coding Arcade games: Memory quest, Tic-Tac-Toe and Love Quiz ---
-        // --- 7. บอร์ดเกมสามระบบ (Memory, Tic Tac Toe, Quiz) ---
-        function switchGame(gameType) {
-            playSoundTone(523.25, 0.1);
-            document.getElementById('game-memory').classList.toggle('hidden', gameType !== 'memory');
-            document.getElementById('game-tictactoe').classList.toggle('hidden', gameType !== 'tictactoe');
-            document.getElementById('game-quiz').classList.toggle('hidden', gameType !== 'quiz');
-
-            document.getElementById('tab-memory').className = gameType === 'memory' ? 'text-[10px] bg-sky-500 text-white px-2.5 py-1.5 rounded-full font-semibold transition shadow-sm' : 'text-[10px] bg-sky-50 text-sky-600 px-2.5 py-1.5 rounded-full font-semibold transition';
-            document.getElementById('tab-tictactoe').className = gameType === 'tictactoe' ? 'text-[10px] bg-sky-500 text-white px-2.5 py-1.5 rounded-full font-semibold transition shadow-sm' : 'text-[10px] bg-sky-50 text-sky-600 px-2.5 py-1.5 rounded-full font-semibold transition';
-            document.getElementById('tab-quiz').className = gameType === 'quiz' ? 'text-[10px] bg-sky-500 text-white px-2.5 py-1.5 rounded-full font-semibold transition shadow-sm' : 'text-[10px] bg-sky-50 text-sky-600 px-2.5 py-1.5 rounded-full font-semibold transition';
-            
-            if (gameType === 'tictactoe') resetTTT();
-            if (gameType === 'quiz') resetQuiz();
-        }
-
-        // -- การ์ดจับคู่ความสุข --
-        const icons = ['fa-heart', 'fa-heart', 'fa-cat', 'fa-cat', 'fa-apple-whole', 'fa-apple-whole', 'fa-star', 'fa-star', 'fa-kiss-wink-heart', 'fa-kiss-wink-heart', 'fa-paw', 'fa-paw'];
-        let shuffledCards = [];
-        let flippedCardElements = [];
-        let matchedPairs = 0;
-
-        function resetMemoryGame() {
-            const board = document.getElementById('memory-board');
-            if (!board) return;
-            board.innerHTML = '';
-            shuffledCards = [...icons].sort(() => Math.random() - 0.5);
-            flippedCardElements = [];
-            matchedPairs = 0;
-            
-            for (let i = 0; i < shuffledCards.length; i++) {
-                const card = document.createElement('div');
-                card.className = 'w-full h-12 bg-sky-50 border-2 border-sky-100 rounded-xl cursor-pointer flex items-center justify-center text-base text-sky-500 transition-all transform active:scale-95';
-                card.dataset.index = i;
-                card.dataset.icon = shuffledCards[i];
-                card.innerHTML = '<i class="fa-solid fa-question text-[10px] text-sky-200"></i>';
-                card.onclick = () => onCardClicked(card);
-                board.appendChild(card);
-            }
-        }
-
-        function onCardClicked(card) {
-            if (flippedCardElements.length >= 2 || card.classList.contains('matched') || flippedCardElements.includes(card)) return;
-            
-            playSoundTone(783.99, 0.1);
-            card.innerHTML = `<i class="fa-solid ${card.dataset.icon}"></i>`;
-            card.classList.replace('bg-sky-50', 'bg-white');
-            flippedCardElements.push(card);
-            
-            if (flippedCardElements.length === 2) {
-                const firstCard = flippedCardElements[0];
-                const secondCard = flippedCardElements[1];
-                
-                if (firstCard.dataset.icon === secondCard.dataset.icon) {
-                    setTimeout(() => {
-                        playSoundTone(880, 0.15);
-                        firstCard.classList.add('matched', 'opacity-50');
-                        secondCard.classList.add('matched', 'opacity-50');
-                        flippedCardElements = [];
-                        matchedPairs++;
-                        if (matchedPairs === icons.length / 2) {
-                            showSurpriseModal("เกมจับคู่สำเร็จ! 💖", "พวกเราสองคนและลูกๆ เหมาะสมเป็นครอบครัวเดียวกันที่สุดจ้า", "เค้าสัญญาว่าความรักของเราจะเต็มสิบไม่มีลดเลยนะค๊าบ");
-                        }
-                    }, 450);
-                } else {
-                    setTimeout(() => {
-                        playSoundTone(349.23, 0.15);
-                        firstCard.innerHTML = '<i class="fa-solid fa-question text-[10px] text-sky-200"></i>';
-                        secondCard.innerHTML = '<i class="fa-solid fa-question text-[10px] text-sky-200"></i>';
-                        firstCard.classList.replace('bg-white', 'bg-sky-50');
-                        secondCard.classList.replace('bg-white', 'bg-sky-50');
-                        flippedCardElements = [];
-                    }, 1000);
-                }
-            }
-        }
-
-        // -- โอเอ็กซ์ตระกูลสองเหมียว (ม่อนส้ม VS โมจิขาว) --
-        let tttBoard = Array(9).fill(null);
-        let tttActivePlayer = "ม่อน (💙)";
-        let isTTTActive = true;
-
-        function resetTTT() {
-            tttBoard = Array(9).fill(null);
-            tttActivePlayer = "ม่อน (💙)";
-            isTTTActive = true;
-            const statusText = document.getElementById('ttt-status');
-            if (statusText) statusText.innerText = `รอบของ: ไอ้ม่อนส้ม (💙)`;
-            const cells = document.querySelectorAll('.ttt-cell');
-            cells.forEach(cell => {
-                cell.innerHTML = '';
-                cell.className = 'ttt-cell bg-slate-50 border border-sky-100 rounded-xl flex items-center justify-center text-xl cursor-pointer h-12 w-12 transition-all';
-            });
-        }
-
-        function makeTTTMove(index) {
-            if (!isTTTActive || tttBoard[index] !== null) return;
-            
-            tttBoard[index] = tttActivePlayer;
-            const cells = document.querySelectorAll('.ttt-cell');
-            
-            if (tttActivePlayer === "ม่อน (💙)") {
-                cells[index].innerHTML = '<i class="fa-solid fa-cat text-amber-500 animate-bounce"></i>'; // ไอ้ม่อนส้ม
-                playSoundTone(523.25, 0.1);
-                
-                if (checkTTTWin()) {
-                    showSurpriseModal("ไอ้ม่อนส้มชนะแย้วว! 🧡", "เจ้าส้มซ่ากวนใจคว้าชัยชนะเมี๊ยว", "พ่อได้รับสิทธิ์พิเศษหอมแก้มแม่แบบแก้มช้ำไปเลยเมี๊ยว!");
-                    isTTTActive = false;
-                    return;
-                }
-                
-                tttActivePlayer = "โมจิ (💖)";
-                document.getElementById('ttt-status').innerText = `รอบของ: ต้าวโมจิขาว (💖)`;
-            } else {
-                cells[index].innerHTML = '<i class="fa-solid fa-cat text-sky-400 animate-bounce"></i>'; // โมจิขาวตาฟ้า
-                playSoundTone(659.25, 0.1);
-                
-                if (checkTTTWin()) {
-                    showSurpriseModal("ต้าวโมจิขาวชนะแล้วว! 🤍", "ต้าวหูพับขาวปุยชนะเกมแบบชิลๆ เมี๊ยว", "แม่คนสวยชนะเกมและได้รับรางวัลคูปองป้อนมังคุดจากใจพ่อค๊าบ!");
-                    isTTTActive = false;
-                    return;
-                }
-                
-                tttActivePlayer = "ม่อน (💙)";
-                document.getElementById('ttt-status').innerText = `รอบของ: ไอ้ม่อนส้ม (💙)`;
-            }
-
-            if (!tttBoard.includes(null)) {
-                showSurpriseModal("เสมอเสมอกัน! ⚖", "เสมอกันเพราะไอ้ม่อนกับโมจิรักพ่อและแม่เท่าๆ กันฮับ", "กอดกันแน่นๆ อบอุ่นหัวใจไปยาวๆ เลยนะ");
-                isTTTActive = false;
-            }
-        }
-
-        function checkTTTWin() {
-            const winPaths = [
-                [0,1,2], [3,4,5], [6,7,8],
-                [0,3,6], [1,4,7], [2,5,8],
-                [0,4,8], [2,4,6]
-            ];
-            return winPaths.some(path => {
-                return tttBoard[path[0]] !== null && tttBoard[path[0]] === tttBoard[path[1]] && tttBoard[path[0]] === tttBoard[path[2]];
-            });
-        }
-
-        // -- ควิซเดาใจนางฟ้าตัวจิ๋ว --
-        const quizData = [
-            {
-                q: "ต้าวแฟนคนสวย สูงเท่าไหร่กันแน่นะเออ? 📏",
-                options: [
-                    "ก. สูง 150 ซม. ตัวจิ๋วพอดีกอดรัดแน่นๆ",
-                    "ข. สูง 155 ซม. ส่วนสูงพอดีสากลโลกคู่ใจเค้าเป๊ะ 💖",
-                    "ค. สูง 160 ซม. นางแบบขาเพรียวแสนสวย"
-                ],
-                correct: 2,
-                comment: "เย้! ถูกต้องที่สุด ส่วนสูง 155 ซม. คือความลงตัวที่สุดในหัวใจของเค้าค๊าบ 🥰"
-            },
-            {
-                q: "วันเกิดแสนโชคดีของคนสวยคือวันใดเอ่ย? 🪐",
-                options: [
-                    "ก. วันพุธแสนร่าเริงแจ่มใสเด็ดเดี่ยว",
-                    "ข. วันเสาร์ นางฟ้าวันเสาร์แสนโชคดีอบอุ่นที่สุดในระบบสุริยะ 🪐",
-                    "ค. วันอาทิตย์ สดใสร้อนแรงดั่งดวงตะวัน"
-                ],
-                correct: 2,
-                comment: "ใช่แล้ว! เกิดวันเสาร์แสนโชคดีมีชัย และนำทางความสุขมาให้แฟนคนนี้ตลอดเวลาเลย"
-            },
-            {
-                q: "สองแสบสี่ขาผู้คุมบ้านมีความน่ารักชื่อสายพันธุ์และตัวสีอะไรบ้างน้า? 🐱",
-                options: [
-                    "ก. ไอ้ม่อนตัวสีส้ม กับ ต้าวโมจิแมวสกอตติชขาวหูพับปุย 🐾",
-                    "ข. ไอ้เปียกตัวเทาลายสลับ กับ บ๊อบบี้แมวส้มตัวกลม",
-                    "ค. ม่อนแมวดำขี้อ้อน กับ โมจิแมวสามสีจอมโหด"
-                ],
-                correct: 1,
-                comment: "ถูกต้องที่สุด! ม่อนเหมียวส้มจอมแสบ กับโมจิสกอตติชหูพับขาวนุ่ม ลูกๆ แสนอบอุ่นในบ้านเรา!"
-            }
-        ];
-        let currentQuizIndex = 0;
-
-        function resetQuiz() {
-            currentQuizIndex = 0;
-            displayQuiz();
-        }
-
-        function displayQuiz() {
-            const data = quizData[currentQuizIndex];
-            const qEl = document.getElementById('quiz-question');
-            if (qEl) qEl.innerText = `คำถามที่ ${currentQuizIndex + 1}: ${data.q}`;
-            const options = document.querySelectorAll('.quiz-option');
-            options.forEach((btn, index) => {
-                btn.innerText = data.options[index];
-                btn.className = "quiz-option text-[11px] bg-sky-50 hover:bg-sky-100 border border-sky-200 p-2 rounded-xl text-left font-medium w-full block transition-all text-slate-700";
-            });
-        }
-
-        function checkQuizAnswer(selectedOption) {
-            const data = quizData[currentQuizIndex];
-            if (selectedOption === data.correct) {
-                playSoundTone(880, 0.15);
-                showSurpriseModal("ตอบถูกเป๊ะค่ะ! 🥇", "แฟนเค้าตอบข้อมูลสายใยได้แม่นยำที่สุดเลย", data.comment);
-                
-                setTimeout(() => {
-                    if (currentQuizIndex < quizData.length - 1) {
-                        currentQuizIndex++;
-                        displayQuiz();
-                    } else {
-                        showSurpriseModal("ผ่านหมดทุกด่านความคุ้นชินแล้ว! 🏆", "ไม่มีใครรู้ใจของเธอได้ลึกซึ้งเท่าเค้า และไม่มีใครรู้ใจเค้าเท่าเธอแน่นอนนะคะ", "รักต้าว 155 ซม. คนเก่งของม่อนโมจิที่สุด!");
-                    }
-                }, 1500);
-            } else {
-                playSoundTone(349.23, 0.15);
-                showSurpriseModal("อุ๊ย... ผิดไปนิดนะคะ 😜", "ลองพิจารณาใหม่อีกสักรอบน้าเดาใจเค้าอีกที", "ลูบหัวเหมียวม่อนโมจิใบ้ตอบทางอ้อมให้แล้วนะ!");
-            }
-        }
-
-        // --- STREAMING_CHUNK: Developing the direct message paper rocket launch physics ---
-        // --- 8. สายด่วนระบายตรงๆ พร้อมแอนิเมชันจดหมายกระดาษพุ่งทะยาน (Direct Message Rocket) ---
-        function sendDirectMessage(event) {
-            const txt = document.getElementById('confess-input').value;
-            if (!txt.trim()) return;
-            
-            const btn = document.getElementById('send-btn');
-            if (!btn) return;
-            const btnRect = btn.getBoundingClientRect();
-            const startX = btnRect.left + btnRect.width / 2;
-            const startY = btnRect.top;
-
-            // คลื่นเสียงวิบวับ
-            playSoundTone(523.25, 0.1);
-            setTimeout(() => playSoundTone(783.99, 0.15), 100);
-            setTimeout(() => playSoundTone(1046.5, 0.3), 200);
-
-            // อนิเมชันกระตุ้นอุ้งเท้าและจรวดจดหมายพุ่งพวยขึ้นด้านบน
-            for (let i = 0; i < 20; i++) {
-                setTimeout(() => {
-                    const container = document.getElementById('ambient-container');
-                    const el = document.createElement('div');
-                    el.className = 'absolute pointer-events-none z-50';
-                    el.innerHTML = '<i class="fa-solid fa-paper-plane text-sky-400"></i>';
-                    
-                    el.style.left = startX + 'px';
-                    el.style.top = startY + 'px';
-                    container.appendChild(el);
-                    
-                    const angle = Math.random() * Math.PI - Math.PI; // ทิศทางพุ่งขึ้นไปข้างบนเท่านั้น
-                    const distance = 250 + Math.random() * 300;
-                    const destX = Math.cos(angle) * distance;
-                    const destY = Math.sin(angle) * distance - 200;
-                    
-                    requestAnimationFrame(() => {
-                        el.style.transition = 'all 1.5s cubic-bezier(0.25, 1, 0.5, 1)';
-                        el.style.transform = `translate3d(${destX}px, ${destY}px, 0) scale(0) rotate(${Math.random()*720 - 360}deg)`;
-                        el.style.opacity = '0';
-                    });
-
-                    setTimeout(() => el.remove(), 1600);
-                }, i * 40);
-            }
-
-            // แสดงหน้าต่างปลดล็อคข้อความตอบรับ
-            setTimeout(() => {
-                showSurpriseModal(
-                    "เค้าได้รับคำพูดเธอแล้วค่ะ! 💬",
-                    "มีอะไรบอกกันตรงๆ สบายใจ สัญญารับฟังทุกอย่างด้วยดวงใจ",
-                    "เค้าได้รับข้อความในหัวใจแล้วน้า สัญญาว่าถึงแม้ช่วงนี้เค้าจะเงียบๆ เพราะงานเยอะเหนื่อยสะสม แต่มีพื้นที่ตรงนี้เค้าพร้อมรับฟังและตั้งมั่นรักแต่เธอคนเดียวเสมอนะคะ 💖"
-                );
-                document.getElementById('confess-input').value = '';
-            }, 1200);
-        }
-
-        // --- 9. เปิดจดหมายรักบานปลาย (Envelope) ---
-        function toggleEnvelope(event) {
-            playSoundTone(523.25, 0.15);
-            const env = document.getElementById('envelope');
-            if (env) {
-                env.classList.toggle('open');
-                if(env.classList.contains('open')) {
-                    spawnAdvancedBurst(event);
-                }
-            }
-        }
-
-        // --- STREAMING_CHUNK: Coding surprise modals and lightbox navigation ---
-        // --- 10. ควบคุมระบบแจ้งสิทธิ์ (Modal Window) ---
+        // --- 7. แจ้งสิทธิ์ (Modal) ---
         function showSurpriseModal(title, desc, text) {
-            const tEl = document.getElementById('modal-title');
-            const dEl = document.getElementById('modal-desc');
-            const sEl = document.getElementById('surprise-text');
-            const mEl = document.getElementById('surprise-modal');
-            
-            if (tEl) tEl.innerText = title;
-            if (dEl) dEl.innerText = desc;
-            if (sEl) sEl.innerText = text;
-            if (mEl) mEl.classList.remove('hidden');
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-desc').innerText = desc;
+            document.getElementById('surprise-text').innerText = text;
+            document.getElementById('surprise-modal').classList.remove('hidden');
         }
-
         function closeSurpriseModal() {
-            playSoundTone(523.25, 0.1);
-            const modal = document.getElementById('surprise-modal');
-            if (modal) modal.classList.add('hidden');
+            playSoundTone(523.25, 0.1); document.getElementById('surprise-modal').classList.add('hidden');
         }
     </script>
 </body>
