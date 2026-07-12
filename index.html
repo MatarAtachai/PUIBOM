@@ -321,7 +321,7 @@
             <!-- PAGE 2: สรวงสวรรค์คนรักแมว (Lounge) -->
             <div id="page-2" class="page-transition w-full page-inactive">
                 <div class="bg-white/80 backdrop-blur-md rounded-3xl p-6 shadow-xl border-2 border-sky-100 text-center">
-                    <h2 class="text-xl font-bold text-sky-600 mb-1"><i class="fa-solid fa-paw mr-1 text-amber-500"></i> ไอ้ม่อน & โมจิ เมี๊ยวสเปซ</h2>
+                    <h2 class="text-xl font-bold text-sky-600 mb-1"><i class="fa-solid fa-paw mr-1 text-amber-500"></i> ไอ้ม่อน & โมจิ </h2>
                     <p class="text-xs text-slate-400 mb-4">ฟีลๆ ลองลูบแก้มหรือแตะหัวลูกๆ ดูสิฮับ</p>
                     
                     <div class="grid grid-cols-2 gap-4 my-2">
@@ -374,13 +374,13 @@
             <!-- PAGE 3: แกะมังคุดทายใจ ฟีลๆ สไตล์คนคลั่งรัก -->
             <div id="page-3" class="page-transition w-full page-inactive">
                 <div class="bg-white/80 backdrop-blur-md rounded-3xl p-6 shadow-xl border-2 border-sky-100 text-center">
-                    <h2 class="text-xl font-bold text-purple-700 mb-1"><i class="fa-solid fa-apple-whole mr-1 text-purple-600"></i> แกะมังคุดทายใจ</h2>
-                    <p class="text-xs text-slate-400 mb-6">ฟีลๆ สไตล์คนคลั่งรัก จิ้มแกะทีละกลีบเลย</p>
+                    <h2 class="text-xl font-bold text-purple-700 mb-1"><i class="fa-solid fa-apple-whole mr-1 text-purple-600"></i> แกะมังคุด </h2>
+                    <p class="text-xs text-slate-400 mb-6">แกะ ๆ ๆ ๆ ๆ ๆ </p>
                     
                     <div class="relative w-48 h-48 mx-auto flex items-center justify-center">
                         <div class="absolute inset-0 flex items-center justify-center z-0 bg-white border-4 border-dashed border-purple-200 rounded-full text-center p-4">
                             <p id="mangosteen-secret" class="text-xs text-purple-800 font-bold leading-normal">
-                                มังคุดที่หวานฉ่ำ ก็ยังทำถึงสู้ความรักที่เค้ามีให้เธอไม่ได้เลยนะ โฮ่งมาก! 💜
+                              ลองแกะให้ครบดูสิ! 💜
                             </p>
                         </div>
 
@@ -403,7 +403,13 @@
                             กลีบที่ 4 🍇
                         </div>
                     </div>
-                    <p class="text-[11px] text-slate-400 mt-4"><i class="fa-solid fa-circle-info mr-1"></i> ปอกให้หมด 4 กลีบเพื่อเฉลยความในใจ</p>
+                    
+                    <p class="text-[11px] text-slate-400 mt-4"><i class="fa-solid fa-circle-info mr-1"></i> ปอกให้หมด 4 กลีบ ดิ</p>
+                    
+                    <!-- ปุ่มรีเฟรชมังคุด (ซ่อนไว้ก่อนจะแสดงตอนแกะครบ) -->
+                    <button id="reset-mangosteen-btn" onclick="resetMangosteen()" class="mt-3 text-[11px] bg-purple-50 text-purple-600 border border-purple-200 px-4 py-1.5 rounded-full font-semibold hover:bg-purple-100 transition shadow-sm hidden mx-auto flex items-center justify-center active:scale-95">
+                        <i class="fa-solid fa-rotate-right mr-1"></i> ขออีกที
+                    </button>
                 </div>
             </div>
 
@@ -466,20 +472,19 @@
     <!-- กล่องเซอร์ไพรส์แจ้งสิทธิ์ -->
     <div id="surprise-modal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-white rounded-3xl max-w-sm w-full p-6 text-center border-4 border-sky-200 shadow-2xl relative">
-            <div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-sky-400 text-white w-16 h-16 rounded-full flex items-center justify-center text-3xl border-4 border-white shadow-md">
+            <div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-sky-400 text-white w-16 h-16 rounded-full flex items-center justify-center text-3xl border-4 border-white shadow-md" id="modal-icon">
                 🎁
             </div>
             <h3 class="text-xl font-bold text-sky-600 mt-6 mb-2" id="modal-title">ยินดีด้วยค่ะ! ❤</h3>
             <p class="text-slate-500 text-xs mb-4" id="modal-desc">สิทธิพิเศษที่คุณได้รับมอบหมาย:</p>
             
             <div class="bg-amber-50/50 border-2 border-dashed border-amber-300 rounded-2xl p-4 mb-4 relative">
-                <div class="absolute right-3 top-3 text-amber-200 text-2xl opacity-50"><i class="fa-solid fa-paw"></i></div>
-                <p id="surprise-text" class="text-lg font-bold text-sky-600 select-all">คูปองป้อนมังคุดแสนหวาน 🍇</p>
-                <p class="text-[9px] text-slate-400 mt-2">สิทธิ์นี้สามารถยื่นมาให้เค้าทำตามใจเธอได้เลยน้า!</p>
+                <div class="absolute right-3 top-3 text-amber-200 text-2xl opacity-50"><i class="fa-solid fa-heart"></i></div>
+                <p id="surprise-text" class="text-base font-bold text-sky-600 select-all leading-relaxed">คูปองความรัก 🍇</p>
             </div>
             
             <button onclick="closeSurpriseModal()" class="w-full bg-sky-400 hover:bg-sky-500 text-white font-semibold py-2 rounded-full transition active:scale-95 shadow-md">
-                บันทึกสิทธิ์รัก ❤
+                บันทึกความทรงจำ ❤
             </button>
         </div>
     </div>
@@ -524,11 +529,6 @@
                 setupGalleryDrag(); // เรียกใช้สคริปต์สไลด์ด้วยเมาส์
                 setActivePage(1);
                 initTiltEffect();
-                
-                setTimeout(() => {
-                    const bar = document.getElementById('height-bar');
-                    if (bar) bar.style.width = '60%';
-                }, 500);
             }, 800);
             
             setInterval(createAmbientParticle, 1200);
@@ -743,7 +743,15 @@
         function petCat(event, catId) {
             playSoundTone(880, 0.1);
             const list = catQuotes[catId];
-            document.getElementById('cat-chat-bubble').innerText = list[Math.floor(Math.random() * list.length)];
+            
+            const bubble = document.getElementById('cat-chat-bubble');
+            bubble.style.opacity = '0';
+            
+            setTimeout(() => {
+                bubble.innerText = list[Math.floor(Math.random() * list.length)];
+                bubble.style.opacity = '1';
+            }, 200);
+            
             const card = event.currentTarget;
             if (card) {
                 const rect = card.getBoundingClientRect();
@@ -756,20 +764,71 @@
             }
         }
 
-        // --- 5. เกมหักกลีบมังคุดฟิสิกส์ ---
+        // --- 5. เกมหักกลีบมังคุดฟิสิกส์ สุ่มมุขเสี่ยว พร้อมปุ่มเล่นซ้ำ ---
+        const mangosteenJokes = [
+            "รักข้างเดียวก็เหมือนจุดเทียนกลางสายฝน แต่เราไม่สน กางร่มแล้วจุดเทียน! ☔🕯️",
+            "มะเร็งเป็นเนื้อร้าย แต่ถ้ารักเธอหมดใจ...เป็นเนื้อคู่ 💖",
+            "ที่บ้านเธอมีไม้เรียวไหม? พอดีดื้อไม่ยอมหยุด อยากโดนตีให้ทรุดคาอก 🥺",
+            "ตัวเลขในโทรศัพท์มีตั้งเยอะ แต่ทำไมเบอร์ที่ใจเพ้อ...มีแค่เธอคนเดียว 📱",
+            "โกรธน้ำ โกรธปลา โกรธฟ้า โกรธฝน แต่ไม่เคยโกรธคนที่ทำให้ใจสั่น 🌧️💓",
+            "กดเจอรับตัง 500 ",
+            "หิวชาเย็น เลยแวะไปซื้อ แต่ถ้าหิวความรักของพี่...ให้ทำไงดีล่ะน้อง 🧋",
+             "ไอ้ เห้ย ม่อน ",
+             "หิหิ ",
+            "กดอีกที"
+        ];
+
         let peeledCount = 0;
+        
         function peelSlice(event, sliceNum) {
             const seg = document.getElementById(`peel-segment-${sliceNum}`);
             if (!seg || seg.style.opacity === '0') return;
+            
             playSoundTone(659.25, 0.15);
             seg.style.transform = 'scale(0.2) translate(-200px, -200px)';
             seg.style.opacity = '0';
             peeledCount++;
+            
             if (peeledCount === 4) {
+                // สุ่มมุขเสี่ยวจากลิสต์
+                const randomJoke = mangosteenJokes[Math.floor(Math.random() * mangosteenJokes.length)];
+                
+                // แสดงข้อความตรงกลางมังคุด
+                const secretText = document.getElementById('mangosteen-secret');
+                secretText.innerText = randomJoke;
+                secretText.style.animation = "springHeart 2.5s infinite";
+
+                // โชว์ปุ่มสุ่มใหม่อีกรอบ
+                document.getElementById('reset-mangosteen-btn').classList.remove('hidden');
+
                 setTimeout(() => {
                     playSoundTone(880, 0.2); setTimeout(() => playSoundTone(1046.5, 0.3), 100);
-                    showSurpriseModal("ปอกมังคุดหมดใจ! 🍇", "ความในใจทั้งหมดเปิดเผยแล้วจ้า", "มังคุดที่ว่าหวานยังสู้ความคลั่งรักที่เค้ามีให้เธอไม่ได้เลย 💜");
+                    document.getElementById('modal-icon').innerText = '🍇';
+                    showSurpriseModal("แกะมังคุดเจอรัก! 🍇", "ความในใจที่ซ่อนอยู่คือ...", randomJoke);
                 }, 800);
+            }
+        }
+
+        // ฟังก์ชันรีเซ็ตเพื่อปอกมังคุดใหม่
+        function resetMangosteen() {
+            playSoundTone(523.25, 0.1);
+            peeledCount = 0;
+            
+            // ซ่อนปุ่มรีเฟรช
+            document.getElementById('reset-mangosteen-btn').classList.add('hidden');
+            
+            // คืนค่าข้อความตรงกลางมังคุด
+            const secretText = document.getElementById('mangosteen-secret');
+            secretText.innerText = "มังคุดผลนี้ซ่อนมุขเสี่ยวอะไรอยู่นะ? ลองแกะให้ครบดูสิ! 💜";
+            secretText.style.animation = "none";
+            
+            // คืนค่ากลีบมังคุดทั้ง 4 กลีบให้กลับมาเหมือนเดิม
+            for(let i = 1; i <= 4; i++) {
+                const seg = document.getElementById(`peel-segment-${i}`);
+                if(seg) {
+                    seg.style.transform = '';
+                    seg.style.opacity = '1';
+                }
             }
         }
 
@@ -792,8 +851,10 @@
                 const item = document.createElement('div');
                 item.className = "gallery-item bg-white p-2.5 pb-4 rounded-xl shadow-md border border-slate-100 select-none";
                 item.innerHTML = `
-                    <div class="w-full h-48 bg-sky-50/50 rounded-lg overflow-hidden border border-slate-100 flex items-center justify-center text-center p-2">
-                        <img src="${url}" class="gallery-image w-full h-full object-cover" draggable="false" onerror="this.onerror=null; this.outerHTML='<div class=\\'flex flex-col items-center justify-center w-full h-full bg-slate-50\\'><i class=\\'fa-solid fa-image text-2xl text-sky-300 mb-2\\'></i><span class=\\'text-[10px] text-slate-400\\'>Loading...</span></div>';">
+                    <div class="w-full h-48 bg-sky-50/50 rounded-lg overflow-hidden border border-slate-100 flex items-center justify-center text-center p-2 relative group">
+                        <!-- เอฟเฟกต์โหลดรูป -->
+                        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent -translate-x-full animate-[shimmer_1.5s_infinite]"></div>
+                        <img src="${url}" class="gallery-image w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" draggable="false" onload="if(this.previousElementSibling) this.previousElementSibling.remove()">
                     </div>
                     <div class="flex justify-center items-center mt-3">
                         <span class="text-pink-400 text-sm spring-heart-beat"><i class="fa-solid fa-heart"></i></span>
