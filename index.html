@@ -447,7 +447,7 @@
                             กลีบที่ 3 🍇
                         </div>
                         <div id="peel-segment-4" onclick="peelSlice(event, 4)" class="mangosteen-segment absolute top-20 left-16 w-16 h-16 bg-[#6b21a8] rounded-full border border-purple-500 shadow-md flex items-center justify-center text-white font-bold text-xs z-20 select-none">
-                            กลีบที่ 4 🍇
+                            กลีbที่ 4 🍇
                         </div>
                     </div>
                     
@@ -457,16 +457,14 @@
 
             <!-- PAGE 4: คลังภาพความทรงจำสุดลื่นไหล (Memories Gallery) -->
             <div id="page-4" class="page-transition w-full page-inactive">
-                <div class="bg-white/80 backdrop-blur-md rounded-3xl p-6 shadow-xl border-2 border-sky-100 text-center">
-                    <h2 class="text-xl font-bold text-sky-600 mb-1"><i class="fa-solid fa-heart-pulse mr-1 text-pink-500"></i> อัลบั้มความทรงจำของเรา</h2>
-                    <p class="text-xs text-slate-400 mb-6">ความหวานและรอยยิ้มแสนพิเศษในวันเวลาดีๆ ของเราสองคน 💙</p>
+                <div class="bg-[#eef3f7] rounded-3xl p-4 shadow-xl border-4 border-[#d1dee5] text-center relative overflow-hidden min-h-[380px]">
+                    <h2 class="text-xl font-bold text-sky-600 mb-1"><i class="fa-solid fa-images mr-1 text-sky-500"></i> บอร์ดความทรงจำแสนอบอุ่น</h2>
+                    <p class="text-[10px] text-slate-500 mb-3">แตะลากย้าย หมุน สลับซ้อนภาพถ่ายคู่รักของเราสองคนได้อย่างอิสระน้า 📍</p>
                     
-                    <!-- อัลบั้มภาพแอนิเมชันแบบสปริงและลอยแกว่งไกวอิสระ (Organic Scattered Layout) -->
-                    <div id="gallery-grid" class="grid grid-cols-2 gap-4 max-h-[360px] overflow-y-auto p-2 scrollbar relative select-none">
-                        <!-- จะเรนเดอร์รูปภาพจริงแบบโพลารอยด์ขยับได้ที่นี่จากฟังก์ชัน JS -->
+                    <!-- พื้นที่กระดานไม้วางภาพถ่ายคู่รัก -->
+                    <div id="polaroid-board" class="relative w-full h-[280px] bg-[#f8fafc]/60 rounded-2xl border border-sky-100/40 shadow-inner overflow-hidden select-none">
+                        <!-- แผ่นภาพจะถูกเรนเดอร์แบบ Dynamic ด้วยโมเดลระบบ Drag & Drop ของ JS ด้านล่าง -->
                     </div>
-                    
-                    <p class="text-[10px] text-slate-400 mt-4"><i class="fa-solid fa-hand-pointer mr-1"></i> จิ้มที่แผ่นโพลารอยด์เพื่อขยายรูปภาพแสนพรีเมียมนะค๊าบ</p>
                 </div>
             </div>
 
@@ -768,6 +766,7 @@
             }
         }
 
+        // --- STREAMING_CHUNK: Initializing tone generator with Web Audio API ---
         // --- 2. เสียงเปียโนสังเคราะห์แสนอบอุ่น (Web Audio API) ---
         let audioCtx = null;
         let melodyInterval = null;
@@ -851,6 +850,7 @@
             }
         }
 
+        // --- STREAMING_CHUNK: Coding the advanced physics-based burst on click events ---
         // --- 3. ตกแต่งบรรยากาศและแอนิเมชันปิ๊งๆ (Defensive Particle Design) ---
         function spawnAdvancedBurst(event) {
             const container = document.getElementById('ambient-container');
@@ -906,55 +906,8 @@
             }
         }
 
-        // ตัวสร้างละอองลอยปลิวคลุมพื้นหลังช้าๆ ละมุนตา
-        function createAmbientParticle() {
-            const container = document.getElementById('ambient-container');
-            if (!container) return;
-            const particle = document.createElement('div');
-            particle.classList.add('ambient-particle');
-            
-            const items = [
-                '<i class="fa-solid fa-heart text-pink-300"></i>',
-                '<i class="fa-solid fa-cat text-sky-200"></i>',
-                '<i class="fa-solid fa-apple-whole text-purple-300"></i>',
-                '<i class="fa-solid fa-feather text-amber-100"></i>'
-            ];
-            
-            particle.innerHTML = items[Math.floor(Math.random() * items.length)];
-            
-            // ตั้งค่า CSS ตัวแปรเพื่อสุ่มทิศทางและระยะทางลอยเอียง
-            const driftX = (Math.random() * 200 - 100) + 'px';
-            const driftAngle = (Math.random() * 360) + 'deg';
-            const driftScale = (0.6 + Math.random() * 0.9);
-            const driftDuration = (6 + Math.random() * 6) + 's';
-            
-            particle.style.setProperty('--drift-x', driftX);
-            particle.style.setProperty('--drift-angle', driftAngle);
-            particle.style.setProperty('--drift-scale', driftScale);
-            particle.style.setProperty('--drift-duration', driftDuration);
-            
-            particle.style.left = Math.random() * 100 + 'vw';
-            container.appendChild(particle);
-            
-            setTimeout(() => {
-                particle.remove();
-            }, 12000);
-        }
-
+        // --- STREAMING_CHUNK: Coding interaction with Mon and Moji with ripple visual effects ---
         // --- 4. การลูบหัวสุ่มเล่นกับน้องเหมียวสองแสบ พร้อมคลื่นกระเพื่อมเสียงคราง (Purr Wave) ---
-        const catQuotes = {
-            mon: [
-                "ม่อนส้มแสบ: พ่อรักแม่คนเดียวเมี๊ยวนะ วันๆ พ่อเปิดรูปแม่ให้ม่อนดูตลอดเลยน้า",
-                "ม่อนส้มแสบ: ถึงงานยุ่งแต่พ่อยิ้มได้ทุกทีที่เห็นรูปแม่ พ่อรักเดียวใจเดียวรับประกันเมี๊ยว!",
-                "ม่อนส้มแสบ: ลูบหัวม่อนส้มอีกนะเมี๊ยว ม่อนขอรับประกันความรักสุดมั่นคงของพ่อฮับ!"
-            ],
-            moji: [
-                "โมจิเมี๊ยว: แม่คนสวยเกิดวันเสาร์สูง 155 แต่อุ้มโมจิสกอตติชหูพับตัวนี้ได้สบายเมี๊ยว!",
-                "โมจิเมี๊ยว: ถึงช่วงนี้พ่อทำงานหนักและพูดน้อยลงแต่ใจพ่อคิดถึงแม่ตลอดนะเมี๊ยว",
-                "โมจิเมี๊ยว: พลังโมจิแมวขาวหูพับจงดลบันดาลให้แม่มีรอยยิ้มแสนหวานและมั่นใจในความรักนะเมี๊ยว!"
-            ]
-        };
-
         function petCat(event, catId) {
             playSoundTone(880, 0.1);
             const list = catQuotes[catId];
@@ -1002,126 +955,126 @@
             }
         }
 
+        // --- STREAMING_CHUNK: Setting up draggable organic polaroid stream from workspace files ---
         // --- 6. คลังรูปภาพความทรงจำจริงแสนสวย (Photo Gallery) & ระบบ Lightbox ---
         
         // ฐานข้อมูลรูปภาพที่ดึงจากภาพที่คุณอัปโหลดโดยตรง เพื่อความเสถียรและสวยงามสูงสุด
         const photoGallery = [
-            {
-                url: "S__11493379_0.jpg", 
-                date: "Our Memories"
-            },
-            {
-                url: "S__11493380_0.jpg", 
-                date: "Sweet Smile"
-            },
-            {
-                url: "S__11493381_0.jpg", 
-                date: "Happy Day"
-            },
-            {
-                url: "S__11493382_0.jpg", 
-                date: "Love Flower"
-            },
-            {
-                url: "S__11493383_0.jpg", 
-                date: "Night Out"
-            },
-            {
-                url: "S__11493384_0.jpg", 
-                date: "Close to You"
-            }
+            { url: "S__11493379_0.jpg", date: "Our Memories" },
+            { url: "S__11493380_0.jpg", date: "Sweet Smile" },
+            { url: "S__11493381_0.jpg", date: "Happy Day" },
+            { url: "S__11493382_0.jpg", date: "Love Flower" },
+            { url: "S__11493383_0.jpg", date: "Night Out" },
+            { url: "S__11493384_0.jpg", date: "Close to You" }
         ];
 
         let activeLightboxIndex = 0;
 
-        // ฟังก์ชันเรนเดอร์แกลเลอรีรูปภาพแบบโพลารอยด์กระจายลอยตัวสปริง (Scattered Gallery Rendering)
+        // เรนเดอร์รูปภาพในรูปแบบกระดาน Polaroid ที่สามารถใช้เมาส์แตะลากย้าย หมุน และสลับซ้อนได้อย่างเป็นธรรมชาติ
         function renderGallery() {
-            const grid = document.getElementById('gallery-grid');
-            if (!grid) return;
-            grid.innerHTML = '';
+            const board = document.getElementById('polaroid-board');
+            if (!board) return;
+            board.innerHTML = '';
             
             photoGallery.forEach((photo, index) => {
                 const polaroid = document.createElement('div');
-                // กำหนดประเภทอนิเมชันลอยแบบสลับ เพื่อความพริ้วไหวเป็นธรรมชาติกระจัดกระจาย
-                const swayClass = `float-sway-${(index % 4) + 1}`;
                 
-                polaroid.className = `gallery-polaroid ${swayClass} bg-white p-2.5 pb-6 rounded-xl shadow-lg border border-slate-100 cursor-pointer select-none transform transition-all duration-300 hover:z-30 hover:scale-110`;
-                polaroid.onclick = (e) => openLightbox(e, index);
+                // กำหนดคลาสและสไตล์พื้นฐานของแผ่นภาพความทรงจำ
+                polaroid.className = "absolute gallery-polaroid bg-white p-2 pb-5 rounded-lg shadow-md border border-slate-100 cursor-grab active:cursor-grabbing select-none w-28 md:w-32 transition-transform duration-200";
+                polaroid.style.touchAction = "none"; // ป้องกันการสกรอลล์ขณะลากบนมือถือ
+                
+                // สุ่มตำแหน่งเริ่มต้นของภาพให้อัดแน่นเรียงซ้อนแบบดูเป็นศิลปะใจกลางบอร์ด
+                const initialLeft = 20 + (index * 12) + (Math.random() * 15);
+                const initialTop = 15 + (index * 8) + (Math.random() * 12);
+                const initialRotation = (Math.random() * 20) - 10;
+                
+                polaroid.style.left = `${initialLeft}%`;
+                polaroid.style.top = `${initialTop}px`;
+                polaroid.style.transform = `rotate(${initialRotation}deg)`;
+                polaroid.style.zIndex = index + 5;
                 
                 polaroid.innerHTML = `
-                    <div class="w-full h-36 bg-sky-50/50 rounded-lg overflow-hidden border border-slate-100 relative">
-                        <!-- เอฟเฟกต์ Shimmer ตอนกำลังโหลดรูปภาพ -->
-                        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent -translate-x-full animate-[shimmer_1.5s_infinite]"></div>
-                        <img src="${photo.url}" alt="Our Memory" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110" onload="if(this.previousElementSibling) this.previousElementSibling.remove()">
+                    <!-- ตัวหนีบรูปหัวใจตกแต่งสุดชิค -->
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 text-pink-400 text-sm z-30 drop-shadow-sm">
+                        <i class="fa-solid fa-heart spring-heart-beat"></i>
                     </div>
-                    <div class="flex justify-center items-center mt-3">
-                        <span class="text-pink-400 text-xs spring-heart-beat"><i class="fa-solid fa-heart"></i></span>
+                    <div class="w-full h-24 bg-sky-50 rounded-md overflow-hidden relative border border-slate-100 pointer-events-none">
+                        <img src="${photo.url}" alt="Memory" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex justify-center items-center mt-2 pointer-events-none">
+                        <span class="text-pink-400 text-[9px]"><i class="fa-solid fa-heart"></i></span>
                     </div>
                 `;
-                grid.appendChild(polaroid);
+                
+                // เพิ่มอีเวนต์สำหรับระบบ Drag and Drop ขั้นแอดวานซ์
+                setupDragAndDrop(polaroid, index);
+                
+                board.appendChild(polaroid);
             });
         }
 
-        function openLightbox(event, index) {
-            playSoundTone(880, 0.15);
-            activeLightboxIndex = index;
+        // --- STREAMING_CHUNK: Coding the advanced touch and pointer drag interaction with Z-index lifting ---
+        // ระบบ Drag and Drop สมบูรณ์แบบ รองรับเมาส์และทัชบนหน้าจอสัมผัส
+        let highestZ = 50;
+
+        function setupDragAndDrop(element, index) {
+            let isDragging = false;
+            let startX, startY;
+            let currentX = 0;
+            let currentY = 0;
             
-            const modal = document.getElementById('lightbox-modal');
-            const card = document.getElementById('lightbox-card');
-            
-            if (modal && card) {
-                document.getElementById('lightbox-img').src = photoGallery[index].url;
-                document.getElementById('lightbox-date').innerText = photoGallery[index].date;
+            // ดับเบิ้ลคลิกเพื่อซูมเปิด Lightbox ขนาดพรีเมียม
+            element.addEventListener('dblclick', (e) => {
+                openLightbox(e, index);
+            });
+
+            // รองรับทั้งเมาส์และหน้าจอทัชสกรีน
+            element.addEventListener('pointerdown', (e) => {
+                isDragging = true;
+                element.style.transition = "none"; // หยุดอนิเมชันลอยชั่วขณะเมื่อถูกจับลาก
                 
-                modal.classList.remove('hidden');
-                setTimeout(() => {
-                    modal.classList.add('opacity-100');
-                    card.classList.remove('scale-90');
-                    card.classList.add('scale-100');
-                }, 50);
-            }
-            
-            spawnAdvancedBurst(event);
+                // ดึง Z-index ขึ้นสูงสุดเพื่อให้มาซ้อนทับภาพอื่นๆ ชั่วขณะ
+                highestZ++;
+                element.style.zIndex = highestZ;
+                
+                startX = e.clientX - element.offsetLeft;
+                startY = e.clientY - element.offsetTop;
+                element.setPointerCapture(e.pointerId);
+            });
+
+            element.addEventListener('pointermove', (e) => {
+                if (!isDragging) return;
+                
+                const board = document.getElementById('polaroid-board');
+                const boardRect = board.getBoundingClientRect();
+                
+                // คำนวณพิกัดการเคลื่อนที่ของภาพขอบเขตกระดาน
+                let newLeft = e.clientX - startX;
+                let newTop = e.clientY - startY;
+                
+                // บังคับขอบเขตป้องกันแผ่นรูปภาพลื่นหลุดออกนอกกระดาน
+                if (newLeft < -10) newLeft = -10;
+                if (newLeft > boardRect.width - element.clientWidth + 10) newLeft = boardRect.width - element.clientWidth + 10;
+                if (newTop < -10) newTop = -10;
+                if (newTop > boardRect.height - element.clientHeight + 10) newTop = boardRect.height - element.clientHeight + 10;
+                
+                element.style.left = `${newLeft}px`;
+                element.style.top = `${newTop}px`;
+            });
+
+            element.addEventListener('pointerup', (e) => {
+                if (!isDragging) return;
+                isDragging = false;
+                element.releasePointerCapture(e.pointerId);
+                
+                // หมุนตัวรูปภาพสุ่มอีกเล็กน้อยเพื่อให้สวยงามอย่างมีชั้นเชิง
+                const finalRotation = (Math.random() * 16) - 8;
+                element.style.transition = "transform 0.4s ease";
+                element.style.transform = `rotate(${finalRotation}deg)`;
+            });
         }
 
-        function closeLightbox(event) {
-            if(event) event.stopPropagation();
-            playSoundTone(523.25, 0.1);
-            
-            const modal = document.getElementById('lightbox-modal');
-            const card = document.getElementById('lightbox-card');
-            
-            if (modal && card) {
-                card.classList.remove('scale-100');
-                card.classList.add('scale-90');
-                
-                setTimeout(() => {
-                    modal.classList.add('hidden');
-                    modal.classList.remove('opacity-100');
-                }, 250);
-            }
-        }
-
-        function navigateLightbox(direction) {
-            let nextIndex = activeLightboxIndex + direction;
-            if (nextIndex < 0) nextIndex = photoGallery.length - 1;
-            if (nextIndex >= photoGallery.length) nextIndex = 0;
-            
-            playSoundTone(659.25, 0.1);
-            activeLightboxIndex = nextIndex;
-            
-            const img = document.getElementById('lightbox-img');
-            if (img) {
-                img.style.opacity = '0.3';
-                
-                setTimeout(() => {
-                    img.src = photoGallery[activeLightboxIndex].url;
-                    document.getElementById('lightbox-date').innerText = photoGallery[activeLightboxIndex].date;
-                    img.style.opacity = '1';
-                }, 150);
-            }
-        }
-
+        // --- STREAMING_CHUNK: Coding Arcade games: Memory quest, Tic-Tac-Toe and Love Quiz ---
         // --- 7. บอร์ดเกมสามระบบ (Memory, Tic Tac Toe, Quiz) ---
         function switchGame(gameType) {
             playSoundTone(523.25, 0.1);
@@ -1336,6 +1289,7 @@
             }
         }
 
+        // --- STREAMING_CHUNK: Developing the direct message paper rocket launch physics ---
         // --- 8. สายด่วนระบายตรงๆ พร้อมแอนิเมชันจดหมายกระดาษพุ่งทะยาน (Direct Message Rocket) ---
         function sendDirectMessage(event) {
             const txt = document.getElementById('confess-input').value;
@@ -1402,6 +1356,7 @@
             }
         }
 
+        // --- STREAMING_CHUNK: Coding surprise modals and lightbox navigation ---
         // --- 10. ควบคุมระบบแจ้งสิทธิ์ (Modal Window) ---
         function showSurpriseModal(title, desc, text) {
             const tEl = document.getElementById('modal-title');
